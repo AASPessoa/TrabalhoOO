@@ -5,6 +5,7 @@
 package com.mycompany.trabalhoorientacaoobjetos.Comandos;
 import com.mycompany.trabalhoorientacaoobjetos.Jogo.PanelJogo;
 import com.mycompany.trabalhoorientacaoobjetos.gamestates.GameStates;
+import static com.mycompany.trabalhoorientacaoobjetos.gamestates.GameStates.INSTRUCOES;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -27,6 +28,10 @@ public class ComandosTeclado implements KeyListener{
             
             case JOGANDO -> telapanel.getjogo().getjogando().KeyPressed(e);
             
+            case INSTRUCOES -> telapanel.getjogo().getinstrucoes().KeyPressed(e);
+            
+            case TELAFINAL -> telapanel.getjogo().gettelafinal().KeyPressed(e);
+            
             default -> {
             }
         }
@@ -39,6 +44,10 @@ public class ComandosTeclado implements KeyListener{
             case MENU -> telapanel.getjogo().getmenu().KeyReleased(e);
             
             case JOGANDO -> telapanel.getjogo().getjogando().KeyReleased(e);
+            
+            case INSTRUCOES -> telapanel.getjogo().getinstrucoes().KeyPressed(e);
+            
+            case TELAFINAL -> telapanel.getjogo().gettelafinal().KeyPressed(e);
             
             default -> {
             }

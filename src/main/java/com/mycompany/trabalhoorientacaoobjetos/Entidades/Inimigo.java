@@ -5,7 +5,7 @@
 package com.mycompany.trabalhoorientacaoobjetos.Entidades;
 
 import com.mycompany.trabalhoorientacaoobjetos.Jogo.Jogo;
-import static com.mycompany.trabalhoorientacaoobjetos.MetodosdeSuporte.MetodosSuporte.*;
+import static com.mycompany.trabalhoorientacaoobjetos.MetodosdeSuporte.MetodosMovimento.*;
 import static com.mycompany.trabalhoorientacaoobjetos.MetodosdeSuporte.Constantes.ConstantesInimigos.*;
 import static com.mycompany.trabalhoorientacaoobjetos.MetodosdeSuporte.Constantes.Direcoes.*;
 import java.awt.geom.Rectangle2D;
@@ -246,7 +246,7 @@ public abstract class  Inimigo extends Entidade{
             if(hitboxataque2.intersects(j.hitbox))
                 j.RecebeDano(-GetDanoInimigos(tipoinimigo));
             checouataque = true;
-        }
+        }        
     }
     
     protected void RecebeDano(int dano , int[][] datanivel , int direcaoataque){
@@ -284,7 +284,9 @@ public abstract class  Inimigo extends Entidade{
     
     
     
-    //GETS
+    public void SetInmigo3Inativo(){
+        this.estadoinimigo = MORRENDO_INIMIGO;
+    }
     
     public boolean GetInimigoAtivo(){
         return this.ativo;

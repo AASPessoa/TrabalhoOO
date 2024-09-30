@@ -4,7 +4,7 @@
  */
 package com.mycompany.trabalhoorientacaoobjetos.Entidades;
 
-import static com.mycompany.trabalhoorientacaoobjetos.MetodosdeSuporte.MetodosSuporte.*;
+import static com.mycompany.trabalhoorientacaoobjetos.MetodosdeSuporte.MetodosMovimento.*;
 import static com.mycompany.trabalhoorientacaoobjetos.MetodosdeSuporte.Constantes.ConstantesJogador.*;
 import com.mycompany.trabalhoorientacaoobjetos.MetodosdeSuporte.LoadSave;
 import com.mycompany.trabalhoorientacaoobjetos.Jogo.Jogo;
@@ -146,7 +146,7 @@ public class Jogador extends Entidade{
         g.drawImage(animacoes[estadojogador][aniindex], (int)(hitbox.x - xdrawoffset) - offsetnivel + virax, (int)(hitbox.y - ydrawoffset), (int)(this.largura * Jogo.Escala) * vira , (int)(this.altura * Jogo.Escala) , null);
         DesenhaVida(g);
         //DesenhaHitbox(g , offsetnivel);
-        DesenhaHitboxDeAtaque1(g , offsetnivel);
+        //DesenhaHitboxDeAtaque1(g , offsetnivel);
     }
     
     private void DesenhaVida(Graphics g){

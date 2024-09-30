@@ -38,7 +38,7 @@ public class BotoesPause {
     
         
     private void CarregaImagens(){
-        BufferedImage temp = LoadSave.getspriteat(LoadSave.botoespause);
+        BufferedImage temp = LoadSave.getspriteat(LoadSave.botoespausefimdefase);
         imgs = new BufferedImage[3];
         for(int i = 0 ; i< imgs.length ; i++){
             imgs[i] = temp.getSubimage(i * PAUSE_TAMANHO_PADRAO , imgindex * PAUSE_TAMANHO_PADRAO , PAUSE_TAMANHO_PADRAO, PAUSE_TAMANHO_PADRAO);

@@ -34,29 +34,38 @@ public class InimigoManager {
     public void Update(int [][] datanivel , Jogador j){
         boolean algumativo = false;
         
-        for(Inimigo1 i1 : faseatual.getinimigo1())
+        for(Inimigo1 i1 : faseatual.getinimigo1()){
             if(i1.GetInimigoAtivo()){
                 i1.Update(datanivel , j);
                 algumativo = true;
             }
+        }
         
-        for(Inimigo2 i2 : faseatual.getinimigo2())
+        for(Inimigo2 i2 : faseatual.getinimigo2()){
             if(i2.GetInimigoAtivo()){
                 i2.Update(datanivel , j);
                 algumativo = true;
             }
+        }
         
-        for(Inimigo3 i3 : faseatual.getinimigo3())
-            if(i3.GetInimigoAtivo()){
-                i3.Update(datanivel , j);
-                algumativo = true;
-            }
-        
-        for(InimigoChefe ic : faseatual.getinimigoc())
+        for(InimigoChefe ic : faseatual.getinimigoc()){
             if(ic.GetInimigoAtivo()){
                 ic.Update(datanivel , j);
                 algumativo = true;
             }
+        }
+        
+        for(Inimigo3 i3 : faseatual.getinimigo3()){
+            if(!algumativo){
+                i3.SetInmigo3Inativo();
+            }
+            
+            if(i3.GetInimigoAtivo()){
+                i3.Update(datanivel , j);
+                algumativo = true;
+            }
+            
+        }
                 
         if(!algumativo)
             jogando.setfimdefase(true);
@@ -73,8 +82,8 @@ public class InimigoManager {
         for(Inimigo1 i1: faseatual.getinimigo1()){
             if(i1.GetInimigoAtivo()){
                 g.drawImage(inimigo1[i1.GetEstadoInimigo()][i1.GetAniindexinimigo()], (int) (i1.GetHitbox().x - offsetnivel - TIPO_1_OFFSET_X) + i1.ViraX() , (int) (i1.GetHitbox().y - TIPO_1_OFFSET_Y),TIPO_1_LARGURA * i1.Vira() , TIPO_1_ALTURA, null);
-                i1.DesenhaHitbox(g , offsetnivel);
-                i1.DesenhaHitboxDeAtaque1(g , offsetnivel);
+                //i1.DesenhaHitbox(g , offsetnivel);
+                //i1.DesenhaHitboxDeAtaque1(g , offsetnivel);
             }
         }
     }
@@ -83,8 +92,8 @@ public class InimigoManager {
         for(Inimigo2 i2: faseatual.getinimigo2()){
             if(i2.GetInimigoAtivo()){
                 g.drawImage(inimigo2[i2.GetEstadoInimigo()][i2.GetAniindexinimigo()], (int) (i2.GetHitbox().x - offsetnivel - TIPO_2_OFFSET_X) + i2.ViraX() , (int) (i2.GetHitbox().y - TIPO_2_OFFSET_Y),TIPO_2_LARGURA * i2.Vira() , TIPO_2_ALTURA, null);
-                i2.DesenhaHitbox(g , offsetnivel);
-                i2.DesenhaHitboxDeAtaque1(g , offsetnivel);
+                //i2.DesenhaHitbox(g , offsetnivel);
+                //i2.DesenhaHitboxDeAtaque1(g , offsetnivel);
             }
         }
     }
@@ -93,8 +102,8 @@ public class InimigoManager {
         for(Inimigo3 i3: faseatual.getinimigo3()){
             if(i3.GetInimigoAtivo()){
                 g.drawImage(inimigo3[i3.GetEstadoInimigo()][i3.GetAniindexinimigo()], (int) (i3.GetHitbox().x - offsetnivel - TIPO_3_OFFSET_X) + i3.ViraX() , (int) (i3.GetHitbox().y - TIPO_3_OFFSET_Y),TIPO_3_LARGURA * i3.Vira() , TIPO_3_ALTURA, null);
-                i3.DesenhaHitbox(g , offsetnivel);
-                i3.DesenhaHitboxDeAtaque1(g , offsetnivel);
+                //i3.DesenhaHitbox(g , offsetnivel);
+                //i3.DesenhaHitboxDeAtaque1(g , offsetnivel);
             }
         }
     }
@@ -103,18 +112,18 @@ public class InimigoManager {
         for(InimigoChefe ic: faseatual.getinimigoc()){
             if(ic.GetInimigoAtivo()){
                 g.drawImage(inimigoc[ic.GetEstadoInimigo()][ic.GetAniindexinimigo()], (int) (ic.GetHitbox().x - offsetnivel - TIPO_CHEFE_OFFSET_X) + ic.ViraX() , (int) (ic.GetHitbox().y - TIPO_CHEFE_OFFSET_Y),TIPO_CHEFE_LARGURA * ic.Vira() , TIPO_CHEFE_ALTURA, null);
-                ic.DesenhaHitbox(g , offsetnivel);
-                ic.DesenhaHitboxDeAtaque1(g , offsetnivel);
-                ic.DesenhaHitboxDeAtaque2(g , offsetnivel);
+                //ic.DesenhaHitbox(g , offsetnivel);
+                //ic.DesenhaHitboxDeAtaque1(g , offsetnivel);
+                //ic.DesenhaHitboxDeAtaque2(g , offsetnivel);
             }
         }
     }
     
     private void CarregaImagensInimigo(){
-        inimigo1 = GetImagensDosInimigos(LoadSave.getspriteat(LoadSave.inimigosp), 9, 5, TIPO_1_LARGURA_PADRAO, TIPO_1_ALTURA_PADRAO);
-        inimigo2 = GetImagensDosInimigos(LoadSave.getspriteat(LoadSave.inimigosp), 9, 5, TIPO_2_LARGURA_PADRAO, TIPO_2_ALTURA_PADRAO);
-        inimigo3 = GetImagensDosInimigos(LoadSave.getspriteat(LoadSave.inimigosp), 9, 5, TIPO_3_LARGURA_PADRAO, TIPO_3_ALTURA_PADRAO);
-        inimigoc = GetImagensDosInimigos(LoadSave.getspriteat(LoadSave.inimigosp), 9, 5, TIPO_CHEFE_LARGURA_PADRAO, TIPO_CHEFE_ALTURA_PADRAO);
+        inimigo1 = GetImagensDosInimigos(LoadSave.getspriteat(LoadSave.inimigo1), 9, 5, TIPO_1_LARGURA_PADRAO, TIPO_1_ALTURA_PADRAO);
+        inimigo2 = GetImagensDosInimigos(LoadSave.getspriteat(LoadSave.inimigo2), 9, 5, TIPO_2_LARGURA_PADRAO, TIPO_2_ALTURA_PADRAO);
+        inimigo3 = GetImagensDosInimigos(LoadSave.getspriteat(LoadSave.inimigo3), 9, 5, TIPO_3_LARGURA_PADRAO, TIPO_3_ALTURA_PADRAO);
+        inimigoc = GetImagensDosInimigos(LoadSave.getspriteat(LoadSave.inimigoc), 9, 5, TIPO_CHEFE_LARGURA_PADRAO, TIPO_CHEFE_ALTURA_PADRAO);
     }
     
     private BufferedImage[][] GetImagensDosInimigos(BufferedImage sprite, int x, int y, int spritelar, int spritealt){

@@ -26,18 +26,22 @@ public class LoadSave {
     public static final String jogadorSp = "player_sprites.png";
     public static final String vidaSp = "barradevida.png";
     //inimigos
-    public static final String inimigosp = "crabby_sprite.png";
+    public static final String inimigo1 = "inimigo1.png";
+    public static final String inimigo2 = "inimigo2.png";
+    public static final String inimigo3 = "inimigo3.png";
+    public static final String inimigoc = "inimigoc.png";
     //fase
-    public static final String fundonivel = "background_menu.png";
+    public static final String fundonivel = "fundofase.png";
     public static final String nivelSp = "outside_sprites.png";
     //hud
+    public static final String fimdejogo = "fimdejogo.png";
+    public static final String instrucoes = "instrucoes.png";
     public static final String menu = "menu_background.png";
     public static final String fundomenu = "background_menu.png";
     public static final String botoesmenu = "botoesmenu.png";
     public static final String pause = "pausefundo.png";
-    public static final String botoespause = "botoespause.png";
-    public static final String fimfase = "menu_background.png";
-    public static final String botoesfimfase = "urm_atlas.png";
+    public static final String botoespausefimdefase = "botoespause.png";
+    public static final String fimfase = "pausefundo.png";
     
     public static BufferedImage[] getfases(){
         URL url = LoadSave.class.getResource("/fases");
@@ -54,7 +58,7 @@ public class LoadSave {
         
         for(int i = 0 ; i < arquivosordenados.length ; i++){
             for(int j = 0 ; j < arquivos.length ; j++){
-                if(arquivos[j].getName().equals((i + 1) + ".png"))
+                if(arquivos[j].getName().equals((i) + ".png"))
                     arquivosordenados[i] = arquivos[j];
             }
         }

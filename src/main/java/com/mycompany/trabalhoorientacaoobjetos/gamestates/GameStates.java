@@ -10,7 +10,7 @@ package com.mycompany.trabalhoorientacaoobjetos.gamestates;
 
 public enum GameStates {
     
-    MENU , JOGANDO , SAIR;
+    MENU , JOGANDO , INSTRUCOES , TELAFINAL ,  SAIR;
     
     public static GameStates state = MENU;
     

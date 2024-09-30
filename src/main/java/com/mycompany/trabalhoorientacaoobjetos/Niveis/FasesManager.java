@@ -6,7 +6,6 @@ package com.mycompany.trabalhoorientacaoobjetos.Niveis;
 
 import com.mycompany.trabalhoorientacaoobjetos.MetodosdeSuporte.LoadSave;
 import com.mycompany.trabalhoorientacaoobjetos.Jogo.Jogo;
-import com.mycompany.trabalhoorientacaoobjetos.gamestates.GameStates;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ public class FasesManager {
     private final Jogo jogo;
     private BufferedImage[] nivelsprite;   
     private final ArrayList<Fase> fases;
-    private int indexfase;
+    private int indexfase = 5;
     
     public FasesManager(Jogo j){
         this.jogo = j;
@@ -64,13 +63,14 @@ public class FasesManager {
     }
     
     public void CarregaProximoNivel(){
-        indexfase++;
-        if(indexfase >= fases.size()){
-            GameStates.state = GameStates.MENU;
+        indexfase = indexfase + 1;
+        
+        if(indexfase == nivelsprite.length){
             return;
         }
         
         Fase seguinte = fases.get(indexfase);
+        
         jogo.getjogando().getinimigomager().AdicionaInimigos(seguinte);
         jogo.getjogando().getjogador().CarregaDadosNivel(seguinte.getdatanivel());
         jogo.getjogando().setoffsetmax(seguinte.getoffsetnivel());
@@ -87,6 +87,10 @@ public class FasesManager {
     
     public int getquantidadedefases(){
         return fases.size();
+    }
+    
+    public int getnumerodafaseatual(){
+        return this.indexfase;
     }
     
     public Fase getnivelatual(){

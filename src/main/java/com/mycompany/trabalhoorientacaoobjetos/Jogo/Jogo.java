@@ -4,7 +4,10 @@
  */
 package com.mycompany.trabalhoorientacaoobjetos.Jogo;
 
+import com.mycompany.trabalhoorientacaoobjetos.Interface.Instrucoes;
+import com.mycompany.trabalhoorientacaoobjetos.Interface.TelaFinal;
 import com.mycompany.trabalhoorientacaoobjetos.gamestates.GameStates;
+import static com.mycompany.trabalhoorientacaoobjetos.gamestates.GameStates.INSTRUCOES;
 import com.mycompany.trabalhoorientacaoobjetos.gamestates.Menu;
 import com.mycompany.trabalhoorientacaoobjetos.gamestates.Jogando;
 import java.awt.Graphics;
@@ -23,6 +26,8 @@ public class Jogo implements Runnable{
     
     private Jogando jogando;
     private Menu menu;
+    private Instrucoes instrucoes;
+    private TelaFinal telafinal;
     
     public final static int TamanhoPadraoDosTiles = 32;
     public final static float Escala = (float) 1.0;
@@ -49,6 +54,8 @@ public class Jogo implements Runnable{
     private void IniciaClasses(){
         menu = new Menu(this);
         jogando = new Jogando(this);
+        instrucoes = new Instrucoes(this.jogando);
+        telafinal = new TelaFinal(this.jogando);
     }
     
             
@@ -66,6 +73,14 @@ public class Jogo implements Runnable{
                 
             case JOGANDO:
                 jogando.Update();
+                break;
+                
+            case INSTRUCOES:
+                instrucoes.update();
+                break;
+                
+                case TELAFINAL:
+                telafinal.update();
                 break;
             
             case SAIR:
@@ -87,8 +102,18 @@ public class Jogo implements Runnable{
                 jogando.Draw(g);
                 break;
                 
+            case INSTRUCOES:
+                instrucoes.Draw(g);
+                break;
+                
+                case TELAFINAL:
+                telafinal.Draw(g);
+                break;
+                
             default:
                 break;
+                
+                
             
         }
                
@@ -142,7 +167,14 @@ public class Jogo implements Runnable{
     }
 
     
+    public Instrucoes getinstrucoes(){
+        return instrucoes;
+    }
 
+    public TelaFinal gettelafinal(){
+        return telafinal;
+    }
+    
     public Menu getmenu(){
         return menu;
     }

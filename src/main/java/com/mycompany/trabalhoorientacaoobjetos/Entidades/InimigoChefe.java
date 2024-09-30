@@ -20,8 +20,8 @@ public class InimigoChefe extends Inimigo{
     public InimigoChefe(float x, float y) {
         super(x, y, TIPO_CHEFE_LARGURA, TIPO_CHEFE_ALTURA, TIPO_CHEFE);
         CriaHitbox( x , y , (int) (22 * Jogo.Escala) , (int) (19 * Jogo.Escala));
-        CriaHitboxDeAtaque1( x , y , (int)(80 * Jogo.Escala) , (int)(80 * Jogo.Escala) );
-        CriaHitboxDeAtaque2( x , y , (int)(80 * Jogo.Escala) , (int)(80 * Jogo.Escala) );
+        CriaHitboxDeAtaque1( x , y , (int)(80 * Jogo.Escala) , (int)(30 * Jogo.Escala) );
+        CriaHitboxDeAtaque2( x , y , (int)(80 * Jogo.Escala) , (int)(30 * Jogo.Escala) );
         ReiniciaHitboxAtaque();
     }
     

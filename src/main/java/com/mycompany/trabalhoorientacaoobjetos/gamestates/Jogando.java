@@ -111,13 +111,22 @@ public class Jogando extends State implements MetodosState{
     }
     
     public void CarregaProximaFase(){
+        ResetaFase();
+        if(!EaUltimaFase()){
         nivelma.CarregaProximoNivel();
         jogador.SetSpawnJogador(nivelma.getnivelatual().getspawn());
-        ResetaJogo();
+        }        
     }
     
     private void CarregaFaselInicial(){
         inimigoma.AdicionaInimigos(nivelma.getnivelatual());
+    }
+    
+    public boolean EaUltimaFase(){
+        if(nivelma.getnumerodafaseatual() == nivelma.getquantidadedefases() - 1){
+            return true;
+        }
+        return false;
     }
     
     private void Calculaoffset(){

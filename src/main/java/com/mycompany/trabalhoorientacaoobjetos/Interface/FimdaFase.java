@@ -36,7 +36,7 @@ public class FimdaFase {
         bgl = (int) (imgfundo.getWidth() * Jogo.Escala) ;
         bga = (int) (imgfundo.getHeight() * Jogo.Escala) ;
         bgx = (int) (Jogo.LarguraDoJogo / 2) - (bgl / 2);
-        bgy = (int) (50 * Jogo.Escala);
+        bgy = (int) (10 * Jogo.Escala);
     }
     
     private void CriaBotoes(){
@@ -55,12 +55,16 @@ public class FimdaFase {
     }
     
     public void Draw(Graphics g){
+        String a = "FIM DO JOGO PRESSIONE ESC OU ENTER PARA VOLTAR AO MENU";
         String b = "PRESSIONE ESC PARA VOLTAR AO MENU";
         String c = "PRESSIONE ENTER PARA IR PARA A FASE";
         g.drawImage(imgfundo, bgx, bgy, bgl, bga, null);
         g.setColor(Color.WHITE);
         g.drawString(b, 290 , 190);
         g.drawString(c, 290 , 290);
+        if(jogando.EaUltimaFase()){
+            g.drawString(a, 250 , 90);
+        }
         menu.Draw(g);
         proximafase.Draw(g);
     }
@@ -74,8 +78,13 @@ public class FimdaFase {
                     break;
                     
             case KeyEvent.VK_ENTER:
-                    jogando.CarregaProximaFase();
-                    jogando.DespausaJogo();
+                    if(jogando.EaUltimaFase()){
+                        GameStates.state = GameStates.TELAFINAL;
+                    }
+                    else{
+                        jogando.CarregaProximaFase();
+                        jogando.DespausaJogo();
+                    }
                     break;        
         }
     }

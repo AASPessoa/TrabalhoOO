@@ -36,7 +36,7 @@ public class FimdeJogo {
         bgl = (int) (imgfundo.getWidth() * Jogo.Escala) ;
         bga = (int) (imgfundo.getHeight() * Jogo.Escala) ;
         bgx = (int) (Jogo.LarguraDoJogo / 2) - (bgl / 2);
-        bgy = (int) (50 * Jogo.Escala);
+        bgy = (int) (10 * Jogo.Escala);
     }
     
     private void CriaBotoes(){

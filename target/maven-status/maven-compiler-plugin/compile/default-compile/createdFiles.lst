@@ -5,12 +5,15 @@ com\mycompany\trabalhoorientacaoobjetos\Entidades\Inimigo2.class
 com\mycompany\trabalhoorientacaoobjetos\Comandos\ComandosMouse.class
 com\mycompany\trabalhoorientacaoobjetos\Entidades\Jogador.class
 com\mycompany\trabalhoorientacaoobjetos\gamestates\State.class
+com\mycompany\trabalhoorientacaoobjetos\MetodosdeSuporte\MetodosMovimento.class
 com\mycompany\trabalhoorientacaoobjetos\Entidades\InimigoManager.class
+com\mycompany\trabalhoorientacaoobjetos\Interface\TelaFinal.class
 com\mycompany\trabalhoorientacaoobjetos\Interface\FimdeJogo.class
 com\mycompany\trabalhoorientacaoobjetos\Entidades\Inimigo3.class
 com\mycompany\trabalhoorientacaoobjetos\Jogo\PanelJogo.class
 com\mycompany\trabalhoorientacaoobjetos\Entidades\Entidade.class
 com\mycompany\trabalhoorientacaoobjetos\Interface\BotoesPause.class
+com\mycompany\trabalhoorientacaoobjetos\Interface\Instrucoes.class
 com\mycompany\trabalhoorientacaoobjetos\MetodosdeSuporte\Constantes$ConstantesJogador.class
 com\mycompany\trabalhoorientacaoobjetos\MetodosdeSuporte\LoadSave.class
 com\mycompany\trabalhoorientacaoobjetos\TrabalhoOrientacaoObjetos.class
@@ -21,7 +24,6 @@ com\mycompany\trabalhoorientacaoobjetos\Comandos\ComandosTeclado$1.class
 com\mycompany\trabalhoorientacaoobjetos\Interface\Pause.class
 com\mycompany\trabalhoorientacaoobjetos\gamestates\Menu.class
 com\mycompany\trabalhoorientacaoobjetos\MetodosdeSuporte\Constantes$Interface.class
-com\mycompany\trabalhoorientacaoobjetos\MetodosdeSuporte\MetodosSuporte.class
 com\mycompany\trabalhoorientacaoobjetos\Entidades\Inimigo.class
 com\mycompany\trabalhoorientacaoobjetos\Entidades\InimigoChefe.class
 com\mycompany\trabalhoorientacaoobjetos\MetodosdeSuporte\Constantes.class

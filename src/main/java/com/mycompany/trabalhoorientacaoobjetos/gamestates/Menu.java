@@ -120,7 +120,11 @@ public class Menu extends State implements MetodosState{
 
     @Override
     public void KeyPressed(KeyEvent e) {
-
+        switch(e.getKeyCode()){
+            case KeyEvent.VK_ESCAPE:
+                    GameStates.state = GameStates.INSTRUCOES;
+                    break;        
+        }
     }
 
     @Override
