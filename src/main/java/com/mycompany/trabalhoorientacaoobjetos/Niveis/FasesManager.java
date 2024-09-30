@@ -19,7 +19,7 @@ public class FasesManager {
     private final Jogo jogo;
     private BufferedImage[] nivelsprite;   
     private final ArrayList<Fase> fases;
-    private int indexfase = 5;
+    private int indexfase = 0;
     
     public FasesManager(Jogo j){
         this.jogo = j;
@@ -65,7 +65,7 @@ public class FasesManager {
     public void CarregaProximoNivel(){
         indexfase = indexfase + 1;
         
-        if(indexfase == nivelsprite.length){
+        if(indexfase == fases.size() - 1){
             return;
         }
         

@@ -111,8 +111,8 @@ public class Jogando extends State implements MetodosState{
     }
     
     public void CarregaProximaFase(){
-        ResetaFase();
         if(!EaUltimaFase()){
+        ResetaFase();   
         nivelma.CarregaProximoNivel();
         jogador.SetSpawnJogador(nivelma.getnivelatual().getspawn());
         }        
