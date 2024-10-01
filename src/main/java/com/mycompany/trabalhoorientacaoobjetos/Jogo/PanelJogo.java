@@ -25,11 +25,11 @@ public class PanelJogo extends JPanel{
         addKeyListener(new ComandosTeclado(this));   
         addMouseListener(mouse);
         addMouseMotionListener(mouse);
-        SetSize();          
+        setSize();          
     }
         
-    private void SetSize(){
-        Dimension size = new Dimension(Jogo.LarguraDoJogo,Jogo.AlturaDoJogo);
+    private void setSize(){
+        Dimension size = new Dimension(Jogo.LARGURA_JOGO,Jogo.ALTURA_JOGO);
         setPreferredSize(size);
     }
        
@@ -40,7 +40,7 @@ public class PanelJogo extends JPanel{
         jogo.render(g);
     }
 
-    public Jogo getjogo() {
+    public Jogo getJogo() {
         return this.jogo;
     }
     

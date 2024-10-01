@@ -24,19 +24,19 @@ public class Instrucoes {
     
     public Instrucoes(Jogando j){
         this.jogando = j;
-        CarregaFundo();
+        carregaFundo();
     }
     
     public void update(){
     }
     
-    private void CarregaFundo(){
-        imagemfundo = LoadSave.getspriteat(LoadSave.instrucoes);
-        bgl = (int) (imagemfundo.getWidth() * Jogo.Escala) ;
-        bga = (int) (imagemfundo.getHeight() * Jogo.Escala) ;
+    private void carregaFundo(){
+        imagemfundo = LoadSave.getSpriteat(LoadSave.SPRITES_INSTRUCOES);
+        bgl = (int) (imagemfundo.getWidth() * Jogo.ESCALA) ;
+        bga = (int) (imagemfundo.getHeight() * Jogo.ESCALA) ;
     }
     
-     public void Draw(Graphics g){
+     public void draw(Graphics g){
         g.drawImage(imagemfundo, 0, 0, bgl, bga, null);    
     }
      
@@ -44,8 +44,8 @@ public class Instrucoes {
         switch(e.getKeyCode()){
             case KeyEvent.VK_ENTER:
                     GameStates.state = GameStates.MENU;
-                    jogando.ResetaJogo();
-                    jogando.DespausaJogo();
+                    jogando.resetaJogo();
+                    jogando.despausaJogo();
                     break;        
         }
     }

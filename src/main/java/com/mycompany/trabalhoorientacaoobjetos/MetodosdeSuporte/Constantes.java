@@ -17,14 +17,14 @@ public class Constantes {
         public static class Botoes {
             public static final int LARGURA_PADRAO_BOTOES = 140;
             public static final int ALTURA_PADRAO_BOTOES = 56;
-            public static final int LARGURA_BOTOES = (int) (LARGURA_PADRAO_BOTOES * Jogo.Escala);
-            public static final int ALTURA_BOTOES = (int) (ALTURA_PADRAO_BOTOES * Jogo.Escala);
+            public static final int LARGURA_BOTOES = (int) (LARGURA_PADRAO_BOTOES * Jogo.ESCALA);
+            public static final int ALTURA_BOTOES = (int) (ALTURA_PADRAO_BOTOES * Jogo.ESCALA);
             
         }
         
         public static class Pause{
             public static final int PAUSE_TAMANHO_PADRAO = 55;
-            public static final int PAUSE_TAMANHO = (int) (PAUSE_TAMANHO_PADRAO * Jogo.Escala);
+            public static final int PAUSE_TAMANHO = (int) (PAUSE_TAMANHO_PADRAO * Jogo.ESCALA);
         }
     }
     
@@ -48,31 +48,31 @@ public class Constantes {
         
         public static final int TIPO_1_LARGURA_PADRAO = 72;
         public static final int TIPO_1_ALTURA_PADRAO = 32;
-        public static final int TIPO_1_LARGURA =  (int) (TIPO_1_LARGURA_PADRAO * Jogo.Escala);
-        public static final int TIPO_1_ALTURA =  (int) (TIPO_1_ALTURA_PADRAO * Jogo.Escala);
-        public static final int TIPO_1_OFFSET_X = (int) (26 * Jogo.Escala);
-        public static final int TIPO_1_OFFSET_Y = (int) (9 * Jogo.Escala);
+        public static final int TIPO_1_LARGURA =  (int) (TIPO_1_LARGURA_PADRAO * Jogo.ESCALA);
+        public static final int TIPO_1_ALTURA =  (int) (TIPO_1_ALTURA_PADRAO * Jogo.ESCALA);
+        public static final int TIPO_1_OFFSET_X = (int) (26 * Jogo.ESCALA);
+        public static final int TIPO_1_OFFSET_Y = (int) (9 * Jogo.ESCALA);
         
         public static final int TIPO_2_LARGURA_PADRAO = 72;
         public static final int TIPO_2_ALTURA_PADRAO = 32;
-        public static final int TIPO_2_LARGURA =  (int) (TIPO_2_LARGURA_PADRAO * Jogo.Escala);
-        public static final int TIPO_2_ALTURA =  (int) (TIPO_2_ALTURA_PADRAO * Jogo.Escala);
-        public static final int TIPO_2_OFFSET_X = (int) (26 * Jogo.Escala);
-        public static final int TIPO_2_OFFSET_Y = (int) (9 * Jogo.Escala);
+        public static final int TIPO_2_LARGURA =  (int) (TIPO_2_LARGURA_PADRAO * Jogo.ESCALA);
+        public static final int TIPO_2_ALTURA =  (int) (TIPO_2_ALTURA_PADRAO * Jogo.ESCALA);
+        public static final int TIPO_2_OFFSET_X = (int) (26 * Jogo.ESCALA);
+        public static final int TIPO_2_OFFSET_Y = (int) (9 * Jogo.ESCALA);
         
         public static final int TIPO_3_LARGURA_PADRAO = 72;
         public static final int TIPO_3_ALTURA_PADRAO = 32;
-        public static final int TIPO_3_LARGURA =  (int) (TIPO_3_LARGURA_PADRAO * Jogo.Escala);
-        public static final int TIPO_3_ALTURA =  (int) (TIPO_3_ALTURA_PADRAO * Jogo.Escala);
-        public static final int TIPO_3_OFFSET_X = (int) (26 * Jogo.Escala);
-        public static final int TIPO_3_OFFSET_Y = (int) (9 * Jogo.Escala);
+        public static final int TIPO_3_LARGURA =  (int) (TIPO_3_LARGURA_PADRAO * Jogo.ESCALA);
+        public static final int TIPO_3_ALTURA =  (int) (TIPO_3_ALTURA_PADRAO * Jogo.ESCALA);
+        public static final int TIPO_3_OFFSET_X = (int) (26 * Jogo.ESCALA);
+        public static final int TIPO_3_OFFSET_Y = (int) (9 * Jogo.ESCALA);
         
         public static final int TIPO_CHEFE_LARGURA_PADRAO = 72;
         public static final int TIPO_CHEFE_ALTURA_PADRAO = 32;
-        public static final int TIPO_CHEFE_LARGURA =  (int) (TIPO_CHEFE_LARGURA_PADRAO * Jogo.Escala);
-        public static final int TIPO_CHEFE_ALTURA =  (int) (TIPO_CHEFE_ALTURA_PADRAO * Jogo.Escala);
-        public static final int TIPO_CHEFE_OFFSET_X = (int) (26 * Jogo.Escala);
-        public static final int TIPO_CHEFE_OFFSET_Y = (int) (9 * Jogo.Escala);
+        public static final int TIPO_CHEFE_LARGURA =  (int) (TIPO_CHEFE_LARGURA_PADRAO * Jogo.ESCALA);
+        public static final int TIPO_CHEFE_ALTURA =  (int) (TIPO_CHEFE_ALTURA_PADRAO * Jogo.ESCALA);
+        public static final int TIPO_CHEFE_OFFSET_X = (int) (26 * Jogo.ESCALA);
+        public static final int TIPO_CHEFE_OFFSET_Y = (int) (9 * Jogo.ESCALA);
         
         public static int GetVidaInimigos(int tipo){
             switch(tipo){

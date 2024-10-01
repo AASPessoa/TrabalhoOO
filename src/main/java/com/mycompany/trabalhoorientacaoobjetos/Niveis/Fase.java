@@ -37,11 +37,11 @@ public class Fase {
     public Fase(BufferedImage img){
         this.img = img;
         niveldata = new int[img.getHeight()][img.getWidth()];
-        CriaFase();
-        calculaoffsets();                
+        criaFase();
+        calculaOffsets();                
     }
     
-    private void CriaFase() {
+    private void criaFase() {
         
         for(int y = 0; y < img.getHeight(); y++){
             for(int x = 0; x < img.getWidth(); x ++){
@@ -51,82 +51,82 @@ public class Fase {
                 int g = cor.getGreen();
                 int b = cor.getBlue();
                 
-                CarregaCenario(r,x,y);
-                CarregaInimigos(g,x,y);
-                CarregaJogador(b,x,y);
+                carregaCenario(r,x,y);
+                carregaInimigos(g,x,y);
+                carregaJogador(b,x,y);
             }
         }
         
     }
     
-    private void CarregaCenario(int r , int x, int y){
+    private void carregaCenario(int r , int x, int y){
         if(r >= 50)
             niveldata[y][x] = 0;
         else
             niveldata[y][x] = r;
     }
     
-    private void CarregaInimigos(int g , int x, int y) {
+    private void carregaInimigos(int g , int x, int y) {
         switch(g){
             case TIPO_1:
-                inimigo1.add(new Inimigo1(x * Jogo.TamanhoDosTiles , y * Jogo.TamanhoDosTiles));
+                inimigo1.add(new Inimigo1(x * Jogo.TAMANHO_TILES , y * Jogo.TAMANHO_TILES));
                 break;
                 
             case TIPO_2:
-                inimigo2.add(new Inimigo2(x * Jogo.TamanhoDosTiles , y * Jogo.TamanhoDosTiles));
+                inimigo2.add(new Inimigo2(x * Jogo.TAMANHO_TILES , y * Jogo.TAMANHO_TILES));
                 break;
                 
             case TIPO_3:
-                inimigo3.add(new Inimigo3(x * Jogo.TamanhoDosTiles , y * Jogo.TamanhoDosTiles));
+                inimigo3.add(new Inimigo3(x * Jogo.TAMANHO_TILES , y * Jogo.TAMANHO_TILES));
                 break;
             
             case TIPO_CHEFE:
-                chefe.add(new InimigoChefe(x * Jogo.TamanhoDosTiles , y * Jogo.TamanhoDosTiles));
+                chefe.add(new InimigoChefe(x * Jogo.TAMANHO_TILES , y * Jogo.TAMANHO_TILES));
                 break;
         }
         
     }
     
-    private void CarregaJogador(int b, int x, int y){
+    private void carregaJogador(int b, int x, int y){
         if(b == 0)
-            this.spawn = new Point(x * Jogo.TamanhoDosTiles , y * Jogo.TamanhoDosTiles);
+            this.spawn = new Point(x * Jogo.TAMANHO_TILES , y * Jogo.TAMANHO_TILES);
     }
      
-    public void calculaoffsets() {
+    public void calculaOffsets() {
         larguraniveltiles = img.getWidth();
-        offsetmaxtiles = larguraniveltiles - Jogo.TilesdeLargura;
-        offsetmaxnivel = Jogo.TamanhoDosTiles * offsetmaxtiles;
+        offsetmaxtiles = larguraniveltiles - Jogo.TILES_LARGURA;
+        offsetmaxnivel = Jogo.TAMANHO_TILES * offsetmaxtiles;
     }
     
-    public int getspriteindex(int x, int y){
+    public int getSpriteindex(int x, int y){
         return niveldata[y][x];
     }
     
-    public int[][] getdatanivel(){
+    public int[][] getDatanivel(){
         return this.niveldata;
     }
     
-    public int getoffsetnivel(){
+    public int getOffsetnivel(){
         return this.offsetmaxnivel;
     }
     
-    public ArrayList<Inimigo1> getinimigo1(){
+    public ArrayList<Inimigo1> getInimigo1(){
         return this.inimigo1;
     }
     
-    public ArrayList<Inimigo2> getinimigo2(){
+    public ArrayList<Inimigo2> getInimigo2(){
         return this.inimigo2;
     }
     
-    public ArrayList<Inimigo3> getinimigo3(){
+    public ArrayList<Inimigo3> getInimigo3(){
         return this.inimigo3;
     }
     
-    public ArrayList<InimigoChefe> getinimigoc(){
+    public ArrayList<InimigoChefe> getInimigoC(){
         return this.chefe;
     }
     
-    public Point getspawn(){
+    public Point getSpawn(){
         return this.spawn;
     }
     

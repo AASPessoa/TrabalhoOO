@@ -32,33 +32,33 @@ public class BotoesMenu {
         this.ypos = y;
         this.indeximg = i;
         this.state = s;
-        CarregaImagens();
-        AreaBotao();
+        carregaImagens();
+        areaBotao();
     }
     
-    private void CarregaImagens(){
+    private void carregaImagens(){
         img = new BufferedImage[3];
-        BufferedImage temp = LoadSave.getspriteat(LoadSave.botoesmenu);
+        BufferedImage temp = LoadSave.getSpriteat(LoadSave.SPRITES_BOTOES_MENU);
         for(int i = 0; i < img.length; i++){
             img[i] = temp.getSubimage(i * LARGURA_PADRAO_BOTOES, indeximg * ALTURA_PADRAO_BOTOES, LARGURA_PADRAO_BOTOES , ALTURA_PADRAO_BOTOES);
         }
     }
     
-    public void AreaBotao(){
+    public void areaBotao(){
         areabotao = new Rectangle( xpos - xoffsetcentro , ypos , LARGURA_BOTOES , ALTURA_BOTOES);
     }
     
     
-    public void AplicaGamestate(){
+    public void aplicaGamestate(){
         GameStates.state = this.state;
     }
     
-    public void ReiniciaBotoes(){
+    public void reiniciaBotoes(){
         mouseacima = false;
         mouseapertado = false;
     }
     
-    public void Update(){
+    public void update(){
         index = 0;
         
         if(this.mouseacima)
@@ -69,7 +69,7 @@ public class BotoesMenu {
             index = 2;
     }
     
-    public void Draw(Graphics g){
+    public void draw(Graphics g){
         g.drawImage(img[index] , xpos - xoffsetcentro , ypos , LARGURA_BOTOES , ALTURA_BOTOES , null);
     }
 

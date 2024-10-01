@@ -18,18 +18,18 @@ public class Inimigo3 extends Inimigo{
     
     public Inimigo3(float x, float y) {
         super(x, y,TIPO_3_LARGURA , TIPO_3_ALTURA , TIPO_3);
-        CriaHitbox( x , y , (int) (22 * Jogo.Escala) , (int) (19 * Jogo.Escala));
-        CriaHitboxDeAtaque1( x , y , (int)(22 * Jogo.Escala) , (int)(35 * Jogo.Escala) );
-        ReiniciaHitboxAtaque();
+        criaHitbox( x , y , (int) (22 * Jogo.ESCALA) , (int) (19 * Jogo.ESCALA));
+        criaHitboxAtaque1( x , y , (int)(22 * Jogo.ESCALA) , (int)(35 * Jogo.ESCALA) );
+        reiniciaHitboxAtaque();
     }
     
     public void Update(int [][] datanivel , Jogador j){
-        Comportamento(datanivel , j);
-        UpdateAnitick();
-        UpdateHitboxDeAtaque();
+        comportamento(datanivel , j);
+        updateAnitick();
+        updateHitboxAtaque();
     }
     
-    private void UpdateHitboxDeAtaque(){
+    private void updateHitboxAtaque(){
         if(direcao == DIREITA){
             hitboxataque1.x = hitbox.x;
         }
@@ -40,18 +40,18 @@ public class Inimigo3 extends Inimigo{
         hitboxataque1.y = hitbox.y - hitboxataque1.height + hitbox.height;
     }
     
-    private void Comportamento(int [][] datanivel , Jogador j){
+    private void comportamento(int [][] datanivel , Jogador j){
         if(updateinicial){
-            ComecaNoAr(datanivel);
+            comecanoAr(datanivel);
         }
         
         if(noar){
-            Cair(datanivel);
+            cair(datanivel);
         }
         else{
             switch(estadoinimigo){
                 case PARADO_INIMIGO:
-                    MudaDeEstado(ATACANDO_INIMIGO);
+                    mudaEstado(ATACANDO_INIMIGO);
                    
                     break;
                     
@@ -60,7 +60,7 @@ public class Inimigo3 extends Inimigo{
                         checouataque = false;
                     
                     if(aniindex == 3 && !checouataque)
-                        DaDano(j);
+                        inflingeDano(j);
                     
                     break;
                     
@@ -70,14 +70,14 @@ public class Inimigo3 extends Inimigo{
         }
     }
     
-    public int ViraX(){
+    public int viraX(){
         if(direcao == DIREITA)
             return largura;
         else
             return 0;
     }
     
-    public int Vira(){
+    public int vira(){
         if(direcao == DIREITA)
             return -1;
         else

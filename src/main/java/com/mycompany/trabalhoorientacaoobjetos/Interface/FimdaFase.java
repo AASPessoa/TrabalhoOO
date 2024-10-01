@@ -27,34 +27,34 @@ public class FimdaFase {
     
     public FimdaFase(Jogando j){
         this.jogando = j;
-        IniciaImagens();
-        CriaBotoes();
+        iniciaImagens();
+        criaBotoes();
     }
     
-    private void IniciaImagens(){
-        imgfundo = LoadSave.getspriteat(LoadSave.fimfase);
-        bgl = (int) (imgfundo.getWidth() * Jogo.Escala) ;
-        bga = (int) (imgfundo.getHeight() * Jogo.Escala) ;
-        bgx = (int) (Jogo.LarguraDoJogo / 2) - (bgl / 2);
-        bgy = (int) (10 * Jogo.Escala);
+    private void iniciaImagens(){
+        imgfundo = LoadSave.getSpriteat(LoadSave.SPRITES_FUNDO_FIM_FASE);
+        bgl = (int) (imgfundo.getWidth() * Jogo.ESCALA) ;
+        bga = (int) (imgfundo.getHeight() * Jogo.ESCALA) ;
+        bgx = (int) (Jogo.LARGURA_JOGO / 2) - (bgl / 2);
+        bgy = (int) (10 * Jogo.ESCALA);
     }
     
-    private void CriaBotoes(){
+    private void criaBotoes(){
         int menuy = 200;
         int proxy = 300;
-        int bx = (int) (390 * Jogo.Escala);
+        int bx = (int) (390 * Jogo.ESCALA);
         
         proximafase = new BotoesPause(bx , proxy , PAUSE_TAMANHO , PAUSE_TAMANHO , 0);
         menu = new BotoesPause(bx , menuy , PAUSE_TAMANHO , PAUSE_TAMANHO , 2);
         
     }
     
-    public void Update(){
-        menu.Update();
-        proximafase.Update();
+    public void update(){
+        menu.update();
+        proximafase.update();
     }
     
-    public void Draw(Graphics g){
+    public void draw(Graphics g){
         String a = "FIM DO JOGO PRESSIONE ESC OU ENTER PARA VOLTAR AO MENU";
         String b = "PRESSIONE ESC PARA VOLTAR AO MENU";
         String c = "PRESSIONE ENTER PARA IR PARA A FASE";
@@ -62,28 +62,28 @@ public class FimdaFase {
         g.setColor(Color.WHITE);
         g.drawString(b, 290 , 190);
         g.drawString(c, 290 , 290);
-        if(jogando.EaUltimaFase()){
+        if(jogando.ultimaFase()){
             g.drawString(a, 250 , 90);
         }
-        menu.Draw(g);
-        proximafase.Draw(g);
+        menu.draw(g);
+        proximafase.draw(g);
     }
     
     public void KeyPressed(KeyEvent e){
         switch(e.getKeyCode()){
             case KeyEvent.VK_ESCAPE:
                     GameStates.state = GameStates.MENU;
-                    jogando.ResetaJogo();
-                    jogando.DespausaJogo();
+                    jogando.resetaJogo();
+                    jogando.despausaJogo();
                     break;
                     
             case KeyEvent.VK_ENTER:
-                    if(jogando.EaUltimaFase()){
+                    if(jogando.ultimaFase()){
                         GameStates.state = GameStates.TELAFINAL;
                     }
                     else{
-                        jogando.CarregaProximaFase();
-                        jogando.DespausaJogo();
+                        jogando.carregaProximaFase();
+                        jogando.despausaJogo();
                     }
                     break;        
         }

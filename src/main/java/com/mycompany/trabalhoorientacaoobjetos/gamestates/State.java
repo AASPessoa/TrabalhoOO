@@ -20,11 +20,11 @@ public class State {
         this.jogo = j;
     }
     
-    public Jogo getjogo(){
+    public Jogo getJogo(){
         return this.jogo;
     }
     
-    public boolean EstaDentro(MouseEvent e , BotoesMenu bm){
+    public boolean estaDentro(MouseEvent e , BotoesMenu bm){
        return bm.getAreabotao().contains(e.getX(),e.getY());
     }
     

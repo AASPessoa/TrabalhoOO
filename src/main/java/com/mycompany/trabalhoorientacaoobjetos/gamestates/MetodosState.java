@@ -13,9 +13,9 @@ import java.awt.event.*;
 
 public interface MetodosState {
     
-    public void Update();
+    public void update();
     
-    public void Draw(Graphics g);
+    public void draw(Graphics g);
     
     public void mouseClicked(MouseEvent e);
     

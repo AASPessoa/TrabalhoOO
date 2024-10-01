@@ -29,29 +29,29 @@ public class Jogo implements Runnable{
     private Instrucoes instrucoes;
     private TelaFinal telafinal;
     
-    public final static int TamanhoPadraoDosTiles = 32;
-    public final static float Escala = (float) 1.0;
-    public final static int TilesdeAltura = 14;
-    public final static int TilesdeLargura = 26;
-    public final static int TamanhoDosTiles = (int)(TamanhoPadraoDosTiles * Escala);
-    public final static int LarguraDoJogo = (TamanhoDosTiles * TilesdeLargura);
-    public final static int AlturaDoJogo = (TamanhoDosTiles * TilesdeAltura);
+    public final static int TAMANHO_PADRAO_TILES = 32;
+    public final static float ESCALA = (float) 1.0;
+    public final static int TILES_ALTURA = 14;
+    public final static int TILES_LARGURA = 26;
+    public final static int TAMANHO_TILES = (int)(TAMANHO_PADRAO_TILES * ESCALA);
+    public final static int LARGURA_JOGO = (TAMANHO_TILES * TILES_LARGURA);
+    public final static int ALTURA_JOGO = (TAMANHO_TILES * TILES_ALTURA);
     
     
     
     public Jogo(){
                 
-        IniciaClasses();
+        iniciaClasses();
         
         JogoPanel = new PanelJogo(this);
         JogoFrame = new FrameJogo(JogoPanel);
         JogoPanel.setFocusable(true);
         JogoPanel.requestFocus();
                
-        GameLoop();        
+        gameloop();        
     }
     
-    private void IniciaClasses(){
+    private void iniciaClasses(){
         menu = new Menu(this);
         jogando = new Jogando(this);
         instrucoes = new Instrucoes(this.jogando);
@@ -59,7 +59,7 @@ public class Jogo implements Runnable{
     }
     
             
-    private void GameLoop(){
+    private void gameloop(){
         JogoThread = new Thread(this);
         JogoThread.start();
     }
@@ -68,18 +68,18 @@ public class Jogo implements Runnable{
         switch(GameStates.state){
             
             case MENU:
-                menu.Update();
+                menu.update();
                 break;
                 
             case JOGANDO:
-                jogando.Update();
+                jogando.update();
                 break;
                 
             case INSTRUCOES:
                 instrucoes.update();
                 break;
                 
-                case TELAFINAL:
+            case TELAFINAL:
                 telafinal.update();
                 break;
             
@@ -95,19 +95,19 @@ public class Jogo implements Runnable{
         switch(GameStates.state){
             
             case MENU:
-                menu.Draw(g);
+                menu.draw(g);
                 break;
                 
             case JOGANDO:
-                jogando.Draw(g);
+                jogando.draw(g);
                 break;
                 
             case INSTRUCOES:
-                instrucoes.Draw(g);
+                instrucoes.draw(g);
                 break;
                 
-                case TELAFINAL:
-                telafinal.Draw(g);
+            case TELAFINAL:
+                telafinal.draw(g);
                 break;
                 
             default:
@@ -167,19 +167,19 @@ public class Jogo implements Runnable{
     }
 
     
-    public Instrucoes getinstrucoes(){
+    public Instrucoes getInstrucoes(){
         return instrucoes;
     }
 
-    public TelaFinal gettelafinal(){
+    public TelaFinal getTelafinal(){
         return telafinal;
     }
     
-    public Menu getmenu(){
+    public Menu getMenu(){
         return menu;
     }
     
-    public Jogando getjogando(){
+    public Jogando getJogando(){
         return jogando;
     }
     

@@ -23,27 +23,27 @@ public class LoadSave {
     
     private Jogo jogo;
     //personagem
-    public static final String jogadorSp = "player_sprites.png";
-    public static final String vidaSp = "barradevida.png";
+    public static final String SPRITES_JOGADOR = "player_sprites.png";
+    public static final String SPRITES_VIDA = "barradevida.png";
     //inimigos
-    public static final String inimigo1 = "inimigo1.png";
-    public static final String inimigo2 = "inimigo2.png";
-    public static final String inimigo3 = "inimigo3.png";
-    public static final String inimigoc = "inimigoc.png";
+    public static final String SPRITES_INIMIGO_1 = "inimigo1.png";
+    public static final String SPRITES_INIMIGO_2 = "inimigo2.png";
+    public static final String SPRITES_INIMIGO_3 = "inimigo3.png";
+    public static final String SPRITES_INIMIGO_CHEFE = "inimigoc.png";
     //fase
-    public static final String fundonivel = "fundofase.png";
-    public static final String nivelSp = "outside_sprites.png";
+    public static final String SPRITES_FUNDO_FASE = "fundofase.png";
+    public static final String SPRITES_FASE = "outside_sprites.png";
     //hud
-    public static final String fimdejogo = "fimdejogo.png";
-    public static final String instrucoes = "instrucoes.png";
-    public static final String menu = "menu_background.png";
-    public static final String fundomenu = "background_menu.png";
-    public static final String botoesmenu = "botoesmenu.png";
-    public static final String pause = "pausefundo.png";
-    public static final String botoespausefimdefase = "botoespause.png";
-    public static final String fimfase = "pausefundo.png";
+    public static final String SPRITES_FIM_JOGO = "fimdejogo.png";
+    public static final String SPRITES_INSTRUCOES = "instrucoes.png";
+    public static final String SPRITES_MENU = "menu_background.png";
+    public static final String SPRITES_FUNDO_MENU = "background_menu.png";
+    public static final String SPRITES_BOTOES_MENU = "botoesmenu.png";
+    public static final String SPRITES_FUNDO_PAUSE = "pausefundo.png";
+    public static final String SPRITES_BOTOES_PAUSE = "botoespause.png";
+    public static final String SPRITES_FUNDO_FIM_FASE = "pausefundo.png";
     
-    public static BufferedImage[] getfases(){
+    public static BufferedImage[] getFases(){
         URL url = LoadSave.class.getResource("/fases");
         File arquivo = null;
         
@@ -76,7 +76,7 @@ public class LoadSave {
         return imgs;
     }
     
-    public static BufferedImage getspriteat(String nomearquivo){
+    public static BufferedImage getSpriteat(String nomearquivo){
         BufferedImage img = null;
         InputStream is = LoadSave.class.getResourceAsStream("/" + nomearquivo);
         

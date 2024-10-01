@@ -24,12 +24,12 @@ public class FasesManager {
     public FasesManager(Jogo j){
         this.jogo = j;
         fases = new ArrayList<>();
-        ImportaSprites();
-        ConstroiFases();
+        importaSprites();
+        constroiFases();
     }
     
-    private void ImportaSprites(){
-        BufferedImage img = LoadSave.getspriteat(LoadSave.nivelSp);
+    private void importaSprites(){
+        BufferedImage img = LoadSave.getSpriteat(LoadSave.SPRITES_FASE);
         nivelsprite = new BufferedImage[48];
         
         for(int j = 0; j < 4; j++){
@@ -41,28 +41,28 @@ public class FasesManager {
         
     }
     
-    private void ConstroiFases(){
-        BufferedImage[] todasasfases = LoadSave.getfases();
+    private void constroiFases(){
+        BufferedImage[] todasasfases = LoadSave.getFases();
         for(BufferedImage img : todasasfases){
             fases.add(new Fase(img));
         }
     }
         
-    public void Draw(Graphics g , int offsetnivel){
+    public void draw(Graphics g , int offsetnivel){
         
-        for(int j = 0; j < Jogo.TilesdeAltura; j++)
-            for(int i = 0; i < fases.get(indexfase).getdatanivel()[0].length ; i++){
-                int index = fases.get(indexfase).getspriteindex(i,j);
-                g.drawImage(nivelsprite[index], (Jogo.TamanhoDosTiles * i) - offsetnivel , Jogo.TamanhoDosTiles * j, Jogo.TamanhoDosTiles, Jogo.TamanhoDosTiles, null);
+        for(int j = 0; j < Jogo.TILES_ALTURA; j++)
+            for(int i = 0; i < fases.get(indexfase).getDatanivel()[0].length ; i++){
+                int index = fases.get(indexfase).getSpriteindex(i,j);
+                g.drawImage(nivelsprite[index], (Jogo.TAMANHO_TILES * i) - offsetnivel , Jogo.TAMANHO_TILES * j, Jogo.TAMANHO_TILES, Jogo.TAMANHO_TILES, null);
             }
         
     }
     
-    public void Update(){
+    public void update(){
         
     }
     
-    public void CarregaProximoNivel(){
+    public void carregaproximoNivel(){
         indexfase = indexfase + 1;
         
         if(indexfase == fases.size() - 1){
@@ -71,29 +71,29 @@ public class FasesManager {
         
         Fase seguinte = fases.get(indexfase);
         
-        jogo.getjogando().getinimigomager().AdicionaInimigos(seguinte);
-        jogo.getjogando().getjogador().CarregaDadosNivel(seguinte.getdatanivel());
-        jogo.getjogando().setoffsetmax(seguinte.getoffsetnivel());
+        jogo.getJogando().getInimigomager().adicionaInimigos(seguinte);
+        jogo.getJogando().getJogador().carregaDadosNivel(seguinte.getDatanivel());
+        jogo.getJogando().setOffsetmax(seguinte.getOffsetnivel());
         
     }
     
-    public void ResetaNiveis(){
+    public void resetaNiveis(){
         indexfase = 0;
         Fase inicial = fases.get(indexfase);
-        jogo.getjogando().getinimigomager().AdicionaInimigos(inicial);
-        jogo.getjogando().getjogador().CarregaDadosNivel(inicial.getdatanivel());
-        jogo.getjogando().setoffsetmax(inicial.getoffsetnivel());
+        jogo.getJogando().getInimigomager().adicionaInimigos(inicial);
+        jogo.getJogando().getJogador().carregaDadosNivel(inicial.getDatanivel());
+        jogo.getJogando().setOffsetmax(inicial.getOffsetnivel());
     }
     
-    public int getquantidadedefases(){
+    public int getQuantidadeFases(){
         return fases.size();
     }
     
-    public int getnumerodafaseatual(){
+    public int getNumeroFaseatual(){
         return this.indexfase;
     }
     
-    public Fase getnivelatual(){
+    public Fase getFaseatual(){
         return fases.get(indexfase);
     }
     

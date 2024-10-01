@@ -27,16 +27,16 @@ public class Pause {
     
     public Pause(Jogando j){
         this.jogando = j;
-        CarregaFundo();
-        CriaBotoes();
+        carregaFundo();
+        criaBotoes();
     }
     
-    private void CriaBotoes(){
+    private void criaBotoes(){
         
         int desy = 140;
         int reiy = 240;
         int menuy = 340;
-        int bx = (int) (390 * Jogo.Escala);
+        int bx = (int) (390 * Jogo.ESCALA);
         
         menu = new BotoesPause(bx , menuy , PAUSE_TAMANHO , PAUSE_TAMANHO , 0);
         reinicia = new BotoesPause(bx , reiy , PAUSE_TAMANHO , PAUSE_TAMANHO , 1);
@@ -44,20 +44,20 @@ public class Pause {
         
     }
     
-    private void CarregaFundo(){
-        imagemfundo = LoadSave.getspriteat(LoadSave.pause);
-        bgl = (int) (imagemfundo.getWidth() * Jogo.Escala) ;
-        bga = (int) (imagemfundo.getHeight() * Jogo.Escala) ;
-        bgx = (int) (Jogo.LarguraDoJogo / 2) - (bgl / 2);
-        bgy = (int) (10 * Jogo.Escala);
+    private void carregaFundo(){
+        imagemfundo = LoadSave.getSpriteat(LoadSave.SPRITES_FUNDO_PAUSE);
+        bgl = (int) (imagemfundo.getWidth() * Jogo.ESCALA) ;
+        bga = (int) (imagemfundo.getHeight() * Jogo.ESCALA) ;
+        bgx = (int) (Jogo.LARGURA_JOGO / 2) - (bgl / 2);
+        bgy = (int) (10 * Jogo.ESCALA);
     }
     
-    public void Update(){
-        menu.Update();
-        despause.Update();
+    public void update(){
+        menu.update();
+        despause.update();
     }
     
-    public void Draw(Graphics g){
+    public void draw(Graphics g){
 
         String b = "PRESSIONE ESC PARA VOLTAR AO MENU";
         String c = "PRESSIONE ESPAÇO PARA REINICIAR A FASE";
@@ -67,26 +67,26 @@ public class Pause {
         g.drawString(b, 290 , 120);
         g.drawString(c, 290 , 220);
         g.drawString(d, 290 , 320);
-        menu.Draw(g);
-        reinicia.Draw(g);
-        despause.Draw(g);
+        menu.draw(g);
+        reinicia.draw(g);
+        despause.draw(g);
     }
     
     public void KeyPressed(KeyEvent e){
         switch(e.getKeyCode()){
             case KeyEvent.VK_ESCAPE:
                     GameStates.state = GameStates.MENU;
-                    jogando.ResetaJogo();
-                    jogando.DespausaJogo();
+                    jogando.resetaJogo();
+                    jogando.despausaJogo();
                     break;
                     
             case KeyEvent.VK_ENTER:
-                    jogando.DespausaJogo();
+                    jogando.despausaJogo();
                     break; 
                     
             case KeyEvent.VK_SPACE:
-                    jogando.ResetaFase();
-                    jogando.DespausaJogo();
+                    jogando.resetaFase();
+                    jogando.despausaJogo();
                     break;        
         }
     }

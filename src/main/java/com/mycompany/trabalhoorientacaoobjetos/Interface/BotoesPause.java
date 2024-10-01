@@ -32,13 +32,13 @@ public class BotoesPause {
         this.altura = a;
         this.imgindex = i;
 
-        AreaBotoes();
-        CarregaImagens();
+        areaBotoes();
+        carregaImagens();
     }
     
         
-    private void CarregaImagens(){
-        BufferedImage temp = LoadSave.getspriteat(LoadSave.botoespausefimdefase);
+    private void carregaImagens(){
+        BufferedImage temp = LoadSave.getSpriteat(LoadSave.SPRITES_BOTOES_PAUSE);
         imgs = new BufferedImage[3];
         for(int i = 0 ; i< imgs.length ; i++){
             imgs[i] = temp.getSubimage(i * PAUSE_TAMANHO_PADRAO , imgindex * PAUSE_TAMANHO_PADRAO , PAUSE_TAMANHO_PADRAO, PAUSE_TAMANHO_PADRAO);
@@ -46,16 +46,16 @@ public class BotoesPause {
         }      
     }
     
-    public void Update(){
+    public void update(){
         
     }
     
-    public void Draw(Graphics g){
+    public void draw(Graphics g){
         g.drawImage(imgs[index], this.x, this.y, PAUSE_TAMANHO , PAUSE_TAMANHO, null);
     }
     
     
-    private void AreaBotoes(){
+    private void areaBotoes(){
         area = new Rectangle( x , y , largura , altura );
     }
 

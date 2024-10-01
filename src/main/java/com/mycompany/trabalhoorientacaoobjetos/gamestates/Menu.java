@@ -25,63 +25,63 @@ public class Menu extends State implements MetodosState{
     
     public Menu(Jogo j) {
         super(j);
-        fundomenu = LoadSave.getspriteat(LoadSave.fundomenu);
-        CarregaFundoMenu();
-        CriaBotoes();
+        fundomenu = LoadSave.getSpriteat(LoadSave.SPRITES_FUNDO_MENU);
+        carregaFundo();
+        criaBotoes();
     }
     
-    private void CarregaFundoMenu(){
-        menu = LoadSave.getspriteat(LoadSave.menu);
-        fmla = (int) (menu.getWidth() * Jogo.Escala);
-        fmal = (int) (menu.getHeight() * Jogo.Escala);
-        fmx = (int) (Jogo.LarguraDoJogo / 2) - (fmla / 2);
-        fmy = (int) (50 * Jogo.Escala);
+    private void carregaFundo(){
+        menu = LoadSave.getSpriteat(LoadSave.SPRITES_MENU);
+        fmla = (int) (menu.getWidth() * Jogo.ESCALA);
+        fmal = (int) (menu.getHeight() * Jogo.ESCALA);
+        fmx = (int) (Jogo.LARGURA_JOGO / 2) - (fmla / 2);
+        fmy = (int) (50 * Jogo.ESCALA);
     }
     
-    private void CriaBotoes(){
-        jogar = new BotoesMenu((int) (Jogo.LarguraDoJogo / 2) , (int)(180 * Jogo.Escala), 0 , GameStates.JOGANDO);
-        sair = new BotoesMenu((int) (Jogo.LarguraDoJogo / 2) , (int)(260 * Jogo.Escala), 1 , GameStates.SAIR);
+    private void criaBotoes(){
+        jogar = new BotoesMenu((int) (Jogo.LARGURA_JOGO / 2) , (int)(180 * Jogo.ESCALA), 0 , GameStates.JOGANDO);
+        sair = new BotoesMenu((int) (Jogo.LARGURA_JOGO / 2) , (int)(260 * Jogo.ESCALA), 1 , GameStates.SAIR);
     }
     
-    private void ReiniciaBotoes(){
-        jogar.ReiniciaBotoes();
-        sair.ReiniciaBotoes();
+    private void reiniciaBotoes(){
+        jogar.reiniciaBotoes();
+        sair.reiniciaBotoes();
     }
     
     @Override
-    public void Update() {
-        jogar.Update();
-        sair.Update();
+    public void update() {
+        jogar.update();
+        sair.update();
     }
 
     @Override
-    public void Draw(Graphics g) {
+    public void draw(Graphics g) {
         g.drawImage(fundomenu, 0, 0, fundomenu.getWidth(), fundomenu.getHeight(), null);
         
         g.drawImage(menu, fmx, fmy, fmla, fmal, null);
         
-        jogar.Draw(g);
-        sair.Draw(g);
+        jogar.draw(g);
+        sair.draw(g);
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if(EstaDentro(e,jogar)){
+        if(estaDentro(e,jogar)){
             jogar.setMouseapertado(true);
         }
         
-        if(EstaDentro(e,sair)){
+        if(estaDentro(e,sair)){
             sair.setMouseapertado(true);
         }
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if(EstaDentro(e,jogar)){
+        if(estaDentro(e,jogar)){
             jogar.setMouseapertado(true);
         }
         
-        if(EstaDentro(e,sair)){
+        if(estaDentro(e,sair)){
             sair.setMouseapertado(true);
         }
     }
@@ -89,17 +89,17 @@ public class Menu extends State implements MetodosState{
     @Override
     public void mouseReleased(MouseEvent e) {
 
-        if(EstaDentro(e,jogar)){
+        if(estaDentro(e,jogar)){
             if(jogar.isMouseapertado())
-                jogar.AplicaGamestate();
+                jogar.aplicaGamestate();
         }
         
-        if(EstaDentro(e,sair)){
+        if(estaDentro(e,sair)){
             if(sair.isMouseapertado())
-                sair.AplicaGamestate();
+                sair.aplicaGamestate();
         }
         
-        ReiniciaBotoes();
+        reiniciaBotoes();
     }
     
     
@@ -109,11 +109,11 @@ public class Menu extends State implements MetodosState{
         jogar.setMouseacima(false);
         sair.setMouseacima(false);
         
-        if(EstaDentro(e,jogar)){
+        if(estaDentro(e,jogar)){
             jogar.setMouseacima(true);
         }
         
-        if(EstaDentro(e,sair)){
+        if(estaDentro(e,sair)){
             sair.setMouseacima(true);
         }
     }

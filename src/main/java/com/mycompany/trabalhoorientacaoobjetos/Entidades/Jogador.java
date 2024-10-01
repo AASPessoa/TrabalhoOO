@@ -33,7 +33,7 @@ public class Jogador extends Entidade{
     private int estadojogador = PARADO_JOGADOR;
     private boolean movendo = false ;
     private boolean  esquerda , direita , pulo;
-    private final float velocidadejogador = (float) (2.0 * Jogo.Escala);
+    private final float velocidadejogador = (float) (2.0 * Jogo.ESCALA);
     
     //ataque
     private boolean ataquechecado , dano = false ,  atacando = false;
@@ -43,28 +43,28 @@ public class Jogador extends Entidade{
     private int [][] ndata;
     
     //hitbox
-    private final float xdrawoffset = 21 * Jogo.Escala;
-    private final float ydrawoffset = 4 * Jogo.Escala;
+    private final float xdrawoffset = 21 * Jogo.ESCALA;
+    private final float ydrawoffset = 4 * Jogo.ESCALA;
     
     //pulo e gravidade
     private float velocidadear = 0;
-    private final float gravidade = (float) (0.1 * Jogo.Escala);
-    private final float velocidadeaposacertaroteto = (float) (0.4 * Jogo.Escala);
-    private final float velocidadedepulo = (float)(-4.0 * Jogo.Escala);
+    private final float gravidade = (float) (0.1 * Jogo.ESCALA);
+    private final float velocidadeaposacertaroteto = (float) (0.4 * Jogo.ESCALA);
+    private final float velocidadedepulo = (float)(-4.0 * Jogo.ESCALA);
     private boolean noar = false;
     
     //vida 
     private BufferedImage vidaimg;
     
-    private final int barrasx = (int) (10 * Jogo.Escala);
-    private final int barrasy = (int) (10 * Jogo.Escala);
-    private final int barraslargura = (int) (192 * Jogo.Escala);
-    private final int barrasaltura = (int) (58 * Jogo.Escala);
+    private final int barrasx = (int) (10 * Jogo.ESCALA);
+    private final int barrasy = (int) (10 * Jogo.ESCALA);
+    private final int barraslargura = (int) (192 * Jogo.ESCALA);
+    private final int barrasaltura = (int) (58 * Jogo.ESCALA);
     
-    private final int barravidax = (int) (48 * Jogo.Escala);
-    private final int barraviday = (int) (11 * Jogo.Escala);
-    private final int barravidalargura = (int) (138 * Jogo.Escala);
-    private final int barravidaaltura = (int) (31 * Jogo.Escala);
+    private final int barravidax = (int) (48 * Jogo.ESCALA);
+    private final int barraviday = (int) (11 * Jogo.ESCALA);
+    private final int barravidalargura = (int) (138 * Jogo.ESCALA);
+    private final int barravidaaltura = (int) (31 * Jogo.ESCALA);
     
     private final int vidatotal = 100;
     private int vidaatual = vidatotal;
@@ -75,36 +75,36 @@ public class Jogador extends Entidade{
     public Jogador(float x, float y , int la , int al , Jogando j) {
         super(x, y, la, al);
         this.jogando = j;
-        CarregaAnimacao();
-        CriaHitbox( x , y , (int)(20 * Jogo.Escala) , (int)(27 * Jogo.Escala) );
-        CriaHitboxDeAtaque1( x , y , (int)(50 * Jogo.Escala) , (int)(27 * Jogo.Escala) );
-        ReiniciaHitboxAtaque();
+        carregaAnimacao();
+        criaHitbox( x , y , (int)(20 * Jogo.ESCALA) , (int)(27 * Jogo.ESCALA) );
+        criaHitboxAtaque1( x , y , (int)(50 * Jogo.ESCALA) , (int)(27 * Jogo.ESCALA) );
+        reiniciaHitboxAtaque();
     }
     
-    public void SetSpawnJogador(Point spawn){
+    public void setSpawnJogador(Point spawn){
         this.x = spawn.x;
         this.y = spawn.y;
         hitbox.x = x;
         hitbox.y = y;
     }
     
-    public void ReiniciaJogador(){
+    public void reiniciaJogador(){
         esquerda =  false;
         direita =  false;
         pulo =  false;
         atacando =  false;
         estadojogador = PARADO_JOGADOR;
         vidaatual = vidatotal;
-        ReiniciaNoAr();
+        reinicianoAr();
         hitbox.x = x;
         hitbox.y = y;
-        ReiniciaHitboxAtaque();
-        if(!estanochao(hitbox,ndata))
+        reiniciaHitboxAtaque();
+        if(!estaChao(hitbox,ndata))
             noar = true;
         
     }
     
-    private void ReiniciaHitboxAtaque(){
+    private void reiniciaHitboxAtaque(){
         if(vira == 1){
             hitboxataque1.x = hitbox.x;
         }
@@ -113,8 +113,8 @@ public class Jogador extends Entidade{
         }
     }
     
-    public void UpdateJogador(){
-        UpdateVida();    
+    public void updateJogador(){
+        updateVida();    
         
         if(vidaatual <= 0){
             if(estadojogador != MORRENDO_JOGADOR){
@@ -123,43 +123,43 @@ public class Jogador extends Entidade{
                 aniindex = 0;
                 jogando.setjorgadormerrendo(true);
             } else if( ( aniindex == (GetSpritesJogador(MORRENDO_JOGADOR) - 1) ) && ( anitick >= (anispeed - 1) ) ){
-                jogando.setfimdejogo(true);
+                jogando.setFimdejogo(true);
             }else
-                UpdateAnitick();
+                updateAnitick();
             
             return;
         }
         
-        UpdateHitboxDeAtaque();
-        Movimentacao();
+        updateHitboxAtaque();
+        movimentacao();
         
         if(atacando){
-            ChecaAtaque();
+            checaAtaque();
         }
         
-        UpdateAnitick();       
-        SetAnimacao(); 
+        updateAnitick();       
+        setAnimacao(); 
         
     }
     
-    public void DesenhaJogador(Graphics g , int offsetnivel){
-        g.drawImage(animacoes[estadojogador][aniindex], (int)(hitbox.x - xdrawoffset) - offsetnivel + virax, (int)(hitbox.y - ydrawoffset), (int)(this.largura * Jogo.Escala) * vira , (int)(this.altura * Jogo.Escala) , null);
-        DesenhaVida(g);
+    public void desenhaJogador(Graphics g , int offsetnivel){
+        g.drawImage(animacoes[estadojogador][aniindex], (int)(hitbox.x - xdrawoffset) - offsetnivel + virax, (int)(hitbox.y - ydrawoffset), (int)(this.largura * Jogo.ESCALA) * vira , (int)(this.altura * Jogo.ESCALA) , null);
+        desenhaVida(g);
         //DesenhaHitbox(g , offsetnivel);
         //DesenhaHitboxDeAtaque1(g , offsetnivel);
     }
     
-    private void DesenhaVida(Graphics g){
+    private void desenhaVida(Graphics g){
         g.setColor(Color.red);
         g.fillRect(barravidax + barrasx , barraviday + barrasy , vidalargura , barravidaaltura);
         g.drawImage(vidaimg, barrasx , barrasy , barraslargura , barrasaltura , null);
     }
     
-    private void UpdateVida(){
+    private void updateVida(){
         vidalargura = (int) ((vidaatual / (float) vidatotal) * barravidalargura);
     }
     
-    private void UpdateHitboxDeAtaque(){
+    private void updateHitboxAtaque(){
         if(direita){
             hitboxataque1.x = hitbox.x;
         }
@@ -170,14 +170,14 @@ public class Jogador extends Entidade{
         hitboxataque1.y = hitbox.y - hitboxataque1.height + hitbox.height;
     }
     
-    private void ChecaAtaque(){
+    private void checaAtaque(){
         if(ataquechecado || aniindex != 1)
             return;
         ataquechecado = true;
-        jogando.ChecaAcerto(hitboxataque1);
+        jogando.checaAcerto(hitboxataque1);
     }
     
-    public void RecebeDano(int a){
+    public void recebeDano(int a){
         vidaatual += a;
         
         dano = true;
@@ -191,8 +191,8 @@ public class Jogador extends Entidade{
                 vidaatual = vidatotal;
     }
     
-    private void CarregaAnimacao() {
-        BufferedImage img = LoadSave.getspriteat(LoadSave.jogadorSp);
+    private void carregaAnimacao() {
+        BufferedImage img = LoadSave.getSpriteat(LoadSave.SPRITES_JOGADOR);
             
         animacoes = new BufferedImage[7][8];
         
@@ -202,17 +202,17 @@ public class Jogador extends Entidade{
                 }
             }
         
-        vidaimg = LoadSave.getspriteat(LoadSave.vidaSp);
+        vidaimg = LoadSave.getSpriteat(LoadSave.SPRITES_VIDA);
                       
     }
     
-    public void CarregaDadosNivel(int [][] nd){
+    public void carregaDadosNivel(int [][] nd){
         this.ndata = nd;
-        if(!estanochao(hitbox,ndata))
+        if(!estaChao(hitbox,ndata))
             noar = true;
     }
     
-    private void UpdateAnitick() {
+    private void updateAnitick() {
         anitick++;
         if(anitick >= anispeed){
             anitick = 0;
@@ -225,12 +225,12 @@ public class Jogador extends Entidade{
         }
     }
     
-    private void ResetaAnitick(){
+    private void resetaAnitick(){
         anitick = 0;
         aniindex = 0;
     }
     
-    private void SetAnimacao() {
+    private void setAnimacao() {
         
         int animacao = estadojogador;
         
@@ -266,15 +266,15 @@ public class Jogador extends Entidade{
         }
         
         if(animacao != estadojogador)
-            ResetaAnitick();
+            resetaAnitick();
     }
 
-    private void Movimentacao() {
+    private void movimentacao() {
        
         movendo = false;
         
         if(pulo)
-            Pular();
+            pular();
         
         if(!noar)
             if((!esquerda && !direita) || (esquerda && direita))
@@ -296,31 +296,31 @@ public class Jogador extends Entidade{
         }
         
         if(!noar){
-            if(!estanochao(hitbox,ndata))
+            if(!estaChao(hitbox,ndata))
                 noar = true;           
         }
         
         
         if(noar){
-            if(podesemover(hitbox.x , hitbox.y + velocidadear , hitbox.width , hitbox.height , this.ndata)){
+            if(podeMover(hitbox.x , hitbox.y + velocidadear , hitbox.width , hitbox.height , this.ndata)){
                 hitbox.y += velocidadear;
                 velocidadear += gravidade;
-                MoveEmX(xvel);
+                moveemX(xvel);
             }else{
-                hitbox.y = getychaoteto(hitbox , velocidadear);
+                hitbox.y = getyChaoTeto(hitbox , velocidadear);
                 if(velocidadear > 0)
-                    ReiniciaNoAr();
+                    reinicianoAr();
                 else
                     velocidadear = velocidadeaposacertaroteto;
-                MoveEmX(xvel);
+                moveemX(xvel);
             }            
         }else
-            MoveEmX(xvel);
+            moveemX(xvel);
         
         movendo = true;
     }
     
-    private void Pular(){
+    private void pular(){
         if(noar)
             return;
         
@@ -329,28 +329,28 @@ public class Jogador extends Entidade{
 
     }
     
-    private void ReiniciaNoAr(){
+    private void reinicianoAr(){
         noar = false;
         velocidadear = 0;
     }
     
-    private void MoveEmX(float xvel){
-        if(podesemover(hitbox.x + xvel , hitbox.y , hitbox.width , hitbox.height , this.ndata)){
+    private void moveemX(float xvel){
+        if(podeMover(hitbox.x + xvel , hitbox.y , hitbox.width , hitbox.height , this.ndata)){
             hitbox.x += xvel;
         } else{
-            hitbox.x = getxparede(hitbox,xvel);
+            hitbox.x = getxParede(hitbox,xvel);
         }
     }
     
-    public int getdirecaoataque() {
+    public int getDirecaoAtaque() {
         return direcaoataque;
     }
     
-    public void setpulando(boolean a){
+    public void setPulando(boolean a){
         this.pulo = a;
     }
     
-    public void setatacando(boolean a){
+    public void setAtacando(boolean a){
         this.atacando = a;
     }
 

@@ -24,13 +24,13 @@ public class ComandosTeclado implements KeyListener{
     @Override
     public void keyPressed(KeyEvent e) {
         switch(GameStates.state) {
-            case MENU -> telapanel.getjogo().getmenu().KeyPressed(e);
+            case MENU -> telapanel.getJogo().getMenu().KeyPressed(e);
             
-            case JOGANDO -> telapanel.getjogo().getjogando().KeyPressed(e);
+            case JOGANDO -> telapanel.getJogo().getJogando().KeyPressed(e);
             
-            case INSTRUCOES -> telapanel.getjogo().getinstrucoes().KeyPressed(e);
+            case INSTRUCOES -> telapanel.getJogo().getInstrucoes().KeyPressed(e);
             
-            case TELAFINAL -> telapanel.getjogo().gettelafinal().KeyPressed(e);
+            case TELAFINAL -> telapanel.getJogo().getTelafinal().KeyPressed(e);
             
             default -> {
             }
@@ -41,13 +41,13 @@ public class ComandosTeclado implements KeyListener{
     @Override
     public void keyReleased(KeyEvent e) {
         switch(GameStates.state) {
-            case MENU -> telapanel.getjogo().getmenu().KeyReleased(e);
+            case MENU -> telapanel.getJogo().getMenu().KeyReleased(e);
             
-            case JOGANDO -> telapanel.getjogo().getjogando().KeyReleased(e);
+            case JOGANDO -> telapanel.getJogo().getJogando().KeyReleased(e);
             
-            case INSTRUCOES -> telapanel.getjogo().getinstrucoes().KeyPressed(e);
+            case INSTRUCOES -> telapanel.getJogo().getInstrucoes().KeyPressed(e);
             
-            case TELAFINAL -> telapanel.getjogo().gettelafinal().KeyPressed(e);
+            case TELAFINAL -> telapanel.getJogo().getTelafinal().KeyPressed(e);
             
             default -> {
             }

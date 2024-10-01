@@ -39,106 +39,106 @@ public class Jogando extends State implements MetodosState{
     private boolean jogadormorrendo = false;
     
     private int offsetnivel ;
-    private int bordaesq = (int) (0.4 * Jogo.LarguraDoJogo);
-    private int bordadir = (int) (0.5 * Jogo.LarguraDoJogo);
+    private int bordaesq = (int) (0.4 * Jogo.LARGURA_JOGO);
+    private int bordadir = (int) (0.5 * Jogo.LARGURA_JOGO);
     private int offsetmaxnivel ;
     
     
 
     public Jogando(Jogo jogo) {
         super(jogo);
-        IniciaClasses();
-        Calculaoffset();
-        CarregaFaselInicial();
+        iniciaClasses();
+        calculaOffset();
+        carregaFaseInicial();
     }
     
-    private void IniciaClasses(){
+    private void iniciaClasses(){
         nivelma = new FasesManager(this.jogo);
         inimigoma = new InimigoManager(this);
-        fundo = LoadSave.getspriteat(LoadSave.fundonivel);
-        jogador = new Jogador((float) 100 , (float) 100 , (int) (64 * Jogo.Escala) , (int) (40 * Jogo.Escala) , this);
-        jogador.CarregaDadosNivel(nivelma.getnivelatual().getdatanivel());
-        jogador.SetSpawnJogador(nivelma.getnivelatual().getspawn());
+        fundo = LoadSave.getSpriteat(LoadSave.SPRITES_FUNDO_FASE);
+        jogador = new Jogador((float) 100 , (float) 100 , (int) (64 * Jogo.ESCALA) , (int) (40 * Jogo.ESCALA) , this);
+        jogador.carregaDadosNivel(nivelma.getFaseatual().getDatanivel());
+        jogador.setSpawnJogador(nivelma.getFaseatual().getSpawn());
         pause = new Pause(this);
         fimdejogo = new FimdeJogo(this);
         fimdafase = new FimdaFase(this);
     }
         
     @Override
-    public void Update() {
+    public void update() {
         
         if(pausado){
-            pause.Update();
+            pause.update();
         }
         
         if(fimfase){
-            fimdafase.Update();
+            fimdafase.update();
         }
         
         if(fimjogo){
-            fimdejogo.Update();
+            fimdejogo.update();
         }else if(jogadormorrendo){
-            jogador.UpdateJogador();
+            jogador.updateJogador();
         }
         else if(!fimjogo && !fimfase && !pausado){
-            nivelma.Update();
-            jogador.UpdateJogador();
-            inimigoma.Update(nivelma.getnivelatual().getdatanivel() , jogador);
-            ChecaDistanciDaBorda();
+            nivelma.update();
+            jogador.updateJogador();
+            inimigoma.update(nivelma.getFaseatual().getDatanivel() , jogador);
+            checaDistanciaBorda();
         }
     }
 
     @Override
-    public void Draw(Graphics g) {
+    public void draw(Graphics g) {
         
-        g.drawImage(fundo, 0, 0, Jogo.LarguraDoJogo, Jogo.AlturaDoJogo, null);
-        nivelma.Draw(g , offsetnivel);
-        jogador.DesenhaJogador(g , offsetnivel);
-        inimigoma.Draw(g , offsetnivel);
+        g.drawImage(fundo, 0, 0, Jogo.LARGURA_JOGO, Jogo.ALTURA_JOGO, null);
+        nivelma.draw(g , offsetnivel);
+        jogador.desenhaJogador(g , offsetnivel);
+        inimigoma.draw(g , offsetnivel);
         
         if(pausado){
             g.setColor(new Color(0 , 0 , 0 , 150));
-            g.fillRect(0, 0, Jogo.LarguraDoJogo, Jogo.AlturaDoJogo);
-            pause.Draw(g);
+            g.fillRect(0, 0, Jogo.LARGURA_JOGO, Jogo.ALTURA_JOGO);
+            pause.draw(g);
         }
         
         if(fimfase)
-            fimdafase.Draw(g);
+            fimdafase.draw(g);
         
         if(fimjogo)
-            fimdejogo.Draw(g);
+            fimdejogo.draw(g);
         
     }
     
-    public void CarregaProximaFase(){
-        if(!EaUltimaFase()){
-        ResetaFase();   
-        nivelma.CarregaProximoNivel();
-        jogador.SetSpawnJogador(nivelma.getnivelatual().getspawn());
+    public void carregaProximaFase(){
+        if(!ultimaFase()){
+        resetaFase();   
+        nivelma.carregaproximoNivel();
+        jogador.setSpawnJogador(nivelma.getFaseatual().getSpawn());
         }        
     }
     
-    private void CarregaFaselInicial(){
-        inimigoma.AdicionaInimigos(nivelma.getnivelatual());
+    private void carregaFaseInicial(){
+        inimigoma.adicionaInimigos(nivelma.getFaseatual());
     }
     
-    public boolean EaUltimaFase(){
-        if(nivelma.getnumerodafaseatual() == nivelma.getquantidadedefases() - 1){
+    public boolean ultimaFase(){
+        if(nivelma.getNumeroFaseatual() == nivelma.getQuantidadeFases() - 1){
             return true;
         }
         return false;
     }
     
-    private void Calculaoffset(){
-        offsetmaxnivel = nivelma.getnivelatual().getoffsetnivel();
+    private void calculaOffset(){
+        offsetmaxnivel = nivelma.getFaseatual().getOffsetnivel();
     }
     
-    public void ChecaAcerto(Rectangle2D.Float hitboxataque){
-        inimigoma.ChecaInimigoAcertado(hitboxataque , jogador);
+    public void checaAcerto(Rectangle2D.Float hitboxataque){
+        inimigoma.checaInimigoAcertado(hitboxataque , jogador);
     }
     
-    private void ChecaDistanciDaBorda(){
-        int xjogador = (int) jogador.GetHitbox().x;
+    private void checaDistanciaBorda(){
+        int xjogador = (int) jogador.getHitbox().x;
         int diferenca = (int) ( xjogador - offsetnivel );
         
         if( diferenca > bordadir){
@@ -160,38 +160,38 @@ public class Jogando extends State implements MetodosState{
         }
     }
     
-    public void DespausaJogo(){
+    public void despausaJogo(){
         pausado = false;
     }
     
-    public void PausaJogo(){
+    public void pausaJogo(){
         pausado = true;
     }
     
-    public void ResetaJogo(){
+    public void resetaJogo(){
         fimjogo = false;
         pausado = false;
         fimfase = false;
         jogadormorrendo = false;
-        jogador.ReiniciaJogador();
-        inimigoma.ReiniciaOsInimigos();
-        nivelma.ResetaNiveis();
+        jogador.reiniciaJogador();
+        inimigoma.reiniciaInimigos();
+        nivelma.resetaNiveis();
     }
     
-    public void ResetaFase(){
+    public void resetaFase(){
         fimjogo = false;
         pausado = false;
         fimfase = false;
         jogadormorrendo = false;
-        jogador.ReiniciaJogador();
-        inimigoma.ReiniciaOsInimigos();
+        jogador.reiniciaJogador();
+        inimigoma.reiniciaInimigos();
     }
     
-    public void setfimdejogo(boolean f){
+    public void setFimdejogo(boolean f){
         this.fimjogo = f;
     }
     
-    public void setoffsetmax(int offset){
+    public void setOffsetmax(int offset){
         this.offsetmaxnivel = offset;
     }
     
@@ -199,15 +199,15 @@ public class Jogando extends State implements MetodosState{
         this.jogadormorrendo = m;
     }
     
-    public void setfimdefase(boolean a){
+    public void setFimdefase(boolean a){
         this.fimfase = a;
     }
     
-    public Jogador getjogador() {
+    public Jogador getJogador() {
         return this.jogador;
     }
     
-    public InimigoManager getinimigomager(){
+    public InimigoManager getInimigomager(){
         return this.inimigoma;
     }
     
@@ -227,7 +227,7 @@ public class Jogando extends State implements MetodosState{
                     break;
                     
                 case KeyEvent.VK_L:
-                    jogador.setpulando(false);
+                    jogador.setPulando(false);
                     break;
             }
         }
@@ -250,11 +250,11 @@ public class Jogando extends State implements MetodosState{
                     break;
                     
                 case KeyEvent.VK_J:
-                    jogador.setatacando(true);
+                    jogador.setAtacando(true);
                     break;
                     
                 case KeyEvent.VK_L:
-                    jogador.setpulando(true);
+                    jogador.setPulando(true);
                     break;
                     
                 case KeyEvent.VK_ENTER:

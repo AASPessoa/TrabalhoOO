@@ -26,7 +26,7 @@ public class ComandosMouse implements MouseListener, MouseMotionListener{
     @Override
     public void mouseClicked(MouseEvent e) {
         switch(GameStates.state){
-            case MENU -> telapanel.getjogo().getmenu().mousePressed(e);
+            case MENU -> telapanel.getJogo().getMenu().mousePressed(e);
                 
             default -> {
             }
@@ -36,7 +36,7 @@ public class ComandosMouse implements MouseListener, MouseMotionListener{
     @Override
     public void mousePressed(MouseEvent e) {
         switch(GameStates.state){
-            case MENU -> telapanel.getjogo().getmenu().mousePressed(e);
+            case MENU -> telapanel.getJogo().getMenu().mousePressed(e);
             
             default -> {
             }
@@ -46,7 +46,7 @@ public class ComandosMouse implements MouseListener, MouseMotionListener{
     @Override
     public void mouseReleased(MouseEvent e) {
         switch(GameStates.state){
-            case MENU -> telapanel.getjogo().getmenu().mouseReleased(e);
+            case MENU -> telapanel.getJogo().getMenu().mouseReleased(e);
                 
             default -> {
             }
@@ -56,7 +56,7 @@ public class ComandosMouse implements MouseListener, MouseMotionListener{
     @Override
     public void mouseMoved(MouseEvent e) {
         switch(GameStates.state){
-            case MENU -> telapanel.getjogo().getmenu().mouseMoved(e);
+            case MENU -> telapanel.getJogo().getMenu().mouseMoved(e);
               
             default -> {
             }

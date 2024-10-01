@@ -27,57 +27,57 @@ public class FimdeJogo {
     
     public FimdeJogo(Jogando j){
         this.jogando = j;
-        IniciaImagens();
-        CriaBotoes();
+        iniciaImagens();
+        criaBotoes();
     }
     
-    private void IniciaImagens(){
-        imgfundo = LoadSave.getspriteat(LoadSave.fimfase);
-        bgl = (int) (imgfundo.getWidth() * Jogo.Escala) ;
-        bga = (int) (imgfundo.getHeight() * Jogo.Escala) ;
-        bgx = (int) (Jogo.LarguraDoJogo / 2) - (bgl / 2);
-        bgy = (int) (10 * Jogo.Escala);
+    private void iniciaImagens(){
+        imgfundo = LoadSave.getSpriteat(LoadSave.SPRITES_FUNDO_FIM_FASE);
+        bgl = (int) (imgfundo.getWidth() * Jogo.ESCALA) ;
+        bga = (int) (imgfundo.getHeight() * Jogo.ESCALA) ;
+        bgx = (int) (Jogo.LARGURA_JOGO / 2) - (bgl / 2);
+        bgy = (int) (10 * Jogo.ESCALA);
     }
     
-    private void CriaBotoes(){
+    private void criaBotoes(){
         int proxy = 300;
         int menuy = 200;
-        int bx = (int) (390 * Jogo.Escala);
+        int bx = (int) (390 * Jogo.ESCALA);
         
         reinicia = new BotoesPause(bx , proxy , PAUSE_TAMANHO , PAUSE_TAMANHO , 0);
         menu = new BotoesPause(bx , menuy , PAUSE_TAMANHO , PAUSE_TAMANHO , 2);
         
     }
     
-    public void Update(){
-        menu.Update();
-        reinicia.Update();
+    public void update(){
+        menu.update();
+        reinicia.update();
     }
     
-    public void Draw(Graphics g){
+    public void draw(Graphics g){
         String b = "PRESSIONE ESC PARA VOLTAR AO MENU";
         String c = "PRESSIONE ENTER PARA REINICIAR A FASE"; 
         g.setColor(new Color(0 , 0 , 0 , 230));
-        g.fillRect(0, 0, Jogo.LarguraDoJogo, Jogo.AlturaDoJogo);
+        g.fillRect(0, 0, Jogo.LARGURA_JOGO, Jogo.ALTURA_JOGO);
         g.drawImage(imgfundo, bgx, bgy, bgl, bga, null);
         g.setColor(Color.WHITE);
         g.drawString(b, 290 , 190);
         g.drawString(c, 290 , 290);
-        menu.Draw(g);
-        reinicia.Draw(g);
+        menu.draw(g);
+        reinicia.draw(g);
     }
     
     public void KeyPressed(KeyEvent e){
         switch(e.getKeyCode()){
             case KeyEvent.VK_ESCAPE:
                     GameStates.state = GameStates.MENU;
-                    jogando.ResetaJogo();
-                    jogando.DespausaJogo();
+                    jogando.resetaJogo();
+                    jogando.despausaJogo();
                     break;
                     
             case KeyEvent.VK_ENTER:
-                    jogando.ResetaFase();
-                    jogando.DespausaJogo();
+                    jogando.resetaFase();
+                    jogando.despausaJogo();
                     break;        
         }
     }

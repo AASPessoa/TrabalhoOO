@@ -19,11 +19,11 @@ public abstract class  Inimigo extends Entidade{
     protected int  estadoinimigo = PARADO_INIMIGO , tipoinimigo;
     protected int anitick , aniindex , anispeed = 15;
     protected boolean updateinicial  = true , noar = false;
-    protected float velocidadequeda = 0 , gravidade  = (float) (0.05 * Jogo.Escala);
-    protected float velocidadeinimigos = (float) (1.0 * Jogo.Escala);
+    protected float velocidadequeda = 0 , gravidade  = (float) (0.05 * Jogo.ESCALA);
+    protected float velocidadeinimigos = (float) (1.0 * Jogo.ESCALA);
     protected int direcao = ESQUERDA;
     protected int tiley;
-    protected float distanciaataque = Jogo.TamanhoDosTiles;
+    protected float distanciaataque = Jogo.TAMANHO_TILES;
     protected int vidatotal;
     protected int vidaatual;
     protected int dano;
@@ -42,18 +42,18 @@ public abstract class  Inimigo extends Entidade{
     }
     
     //RESET
-    protected void ReiniciaOsInimigos(){
+    protected void reiniciaInimigos(){
         vidaatual = vidatotal;
         velocidadequeda = 0;
         updateinicial = true;
         ativo = true;
         hitbox.x = x;
         hitbox.y = y;
-        MudaDeEstado(PARADO_INIMIGO);
-        ReiniciaHitboxAtaque();
+        mudaEstado(PARADO_INIMIGO);
+        reiniciaHitboxAtaque();
     }
     
-    protected void ReiniciaHitboxAtaque(){
+    protected void reiniciaHitboxAtaque(){
         if(estadoinimigo == DIREITA){
             hitboxataque1.x = hitbox.x;
         }
@@ -64,20 +64,20 @@ public abstract class  Inimigo extends Entidade{
     
     
     //COMPORTAMENTO
-    protected void ComecaNoAr(int[][] datanivel){
-        if(!estanochao(this.hitbox , datanivel))
+    protected void comecanoAr(int[][] datanivel){
+        if(!estaChao(this.hitbox , datanivel))
                 noar = true;
             updateinicial = false;
     }
     
-    protected void MudaDeEstado(int estado){
+    protected void mudaEstado(int estado){
         this.estadoinimigo = estado;
         anitick = 0;
         aniindex = 0;
     }
     
     
-    protected void MudaDeDirecao(){
+    protected void mudarDirecao(){
         if(direcao == ESQUERDA)
             direcao = DIREITA;
         else
@@ -85,19 +85,19 @@ public abstract class  Inimigo extends Entidade{
       
     }
     
-    protected void Cair(int[][] datanivel){
-        if(podesemover(this.hitbox.x , this.hitbox.y + velocidadequeda, this.hitbox.width , this.hitbox.height , datanivel)){
+    protected void cair(int[][] datanivel){
+        if(podeMover(this.hitbox.x , this.hitbox.y + velocidadequeda, this.hitbox.width , this.hitbox.height , datanivel)){
                 hitbox.y += velocidadequeda;
                 velocidadequeda += gravidade;
             }
             else{
                 noar = false;
-                hitbox.y = getychaoteto(this.hitbox, velocidadequeda);
-                tiley = (int) (hitbox.y / Jogo.TamanhoDosTiles);
+                hitbox.y = getyChaoTeto(this.hitbox, velocidadequeda);
+                tiley = (int) (hitbox.y / Jogo.TAMANHO_TILES);
             }
     }
     
-    protected void Recua(int[][] datanivel , int direcaoataque){
+    protected void recuar(int[][] datanivel , int direcaoataque){
         float velx = 0;
         int recuo;
         
@@ -114,22 +114,22 @@ public abstract class  Inimigo extends Entidade{
                 velx = velocidadeinimigos * recuo;
         }
                     
-        if(!podesemover((float)(this.hitbox.x + velx), this.hitbox.y , this.hitbox.width , this.hitbox.height , datanivel))
-            MudaDeDirecao();
+        if(!podeMover((float)(this.hitbox.x + velx), this.hitbox.y , this.hitbox.width , this.hitbox.height , datanivel))
+            mudarDirecao();
         
         if(!noar){
-            if(!estanochao(hitbox , datanivel))
+            if(!estaChao(hitbox , datanivel))
                 noar = true;           
         }
         
-        if((noar) && (podesemover((float)(this.hitbox.x + velx), this.hitbox.y , this.hitbox.width , this.hitbox.height , datanivel)))
-            Cair(datanivel);
+        if((noar) && (podeMover((float)(this.hitbox.x + velx), this.hitbox.y , this.hitbox.width , this.hitbox.height , datanivel)))
+            cair(datanivel);
                     
-        if(podesemover((float)(this.hitbox.x + velx), this.hitbox.y , this.hitbox.width , this.hitbox.height , datanivel))
+        if(podeMover((float)(this.hitbox.x + velx), this.hitbox.y , this.hitbox.width , this.hitbox.height , datanivel))
             this.hitbox.x += velx;
     }
     
-    protected void MovimentoSemQueda(int[][] datanivel){
+    protected void movimentoSemQueda(int[][] datanivel){
         float velx = 0;
                     
         if(direcao == ESQUERDA)
@@ -138,17 +138,17 @@ public abstract class  Inimigo extends Entidade{
             if(direcao == DIREITA)
                 velx = velocidadeinimigos;}
                     
-        if(!podesemover((float)(this.hitbox.x + velx), this.hitbox.y , this.hitbox.width , this.hitbox.height , datanivel))
-            MudaDeDirecao();
+        if(!podeMover((float)(this.hitbox.x + velx), this.hitbox.y , this.hitbox.width , this.hitbox.height , datanivel))
+            mudarDirecao();
                     
-        if(ebeirada(hitbox , velx , direcao, datanivel))
-            MudaDeDirecao();
+        if(eBeirada(hitbox , velx , direcao, datanivel))
+            mudarDirecao();
                     
-        if(podesemover((float)(this.hitbox.x + velx), this.hitbox.y , this.hitbox.width , this.hitbox.height , datanivel))
+        if(podeMover((float)(this.hitbox.x + velx), this.hitbox.y , this.hitbox.width , this.hitbox.height , datanivel))
             this.hitbox.x += velx;
     }
     
-    protected void MovimentoComQueda(int[][] datanivel){
+    protected void movimentoComQueda(int[][] datanivel){
         float velx = 0;
                     
         if(direcao == ESQUERDA)
@@ -157,27 +157,27 @@ public abstract class  Inimigo extends Entidade{
             if(direcao == DIREITA)
                 velx = velocidadeinimigos;}
                     
-        if(!podesemover((float)(this.hitbox.x + velx), this.hitbox.y , this.hitbox.width , this.hitbox.height , datanivel))
-            MudaDeDirecao();
+        if(!podeMover((float)(this.hitbox.x + velx), this.hitbox.y , this.hitbox.width , this.hitbox.height , datanivel))
+            mudarDirecao();
         
         if(!noar){
-            if(!estanochao(hitbox , datanivel))
+            if(!estaChao(hitbox , datanivel))
                 noar = true;           
         }
         
-        if((noar) && (podesemover((float)(this.hitbox.x + velx), this.hitbox.y , this.hitbox.width , this.hitbox.height , datanivel)))
-            Cair(datanivel);
+        if((noar) && (podeMover((float)(this.hitbox.x + velx), this.hitbox.y , this.hitbox.width , this.hitbox.height , datanivel)))
+            cair(datanivel);
                     
-        if(podesemover((float)(this.hitbox.x + velx), this.hitbox.y , this.hitbox.width , this.hitbox.height , datanivel))
+        if(podeMover((float)(this.hitbox.x + velx), this.hitbox.y , this.hitbox.width , this.hitbox.height , datanivel))
             this.hitbox.x += velx;
     }
       
     
-    protected boolean PodeVerJogador(int[][] datanivel , Jogador jogador){
-        int jogadortiley = (int) (jogador.GetHitbox().y / Jogo.TamanhoDosTiles);
+    protected boolean jogadorVisivel(int[][] datanivel , Jogador jogador){
+        int jogadortiley = (int) (jogador.getHitbox().y / Jogo.TAMANHO_TILES);
         if(jogadortiley == tiley){
-            if(JogadorNaVisao(jogador)){
-                if(VisaoEstaLimpa(datanivel , hitbox, jogador.hitbox , tiley)){
+            if(jogadorDistanciaVisivel(jogador)){
+                if(visaoLimpa(datanivel , hitbox, jogador.hitbox , tiley)){
                     return true;
                 }
             }
@@ -186,42 +186,42 @@ public abstract class  Inimigo extends Entidade{
         return false;
     }
     
-    protected boolean JogadorNaVisao(Jogador j){
+    protected boolean jogadorDistanciaVisivel(Jogador j){
         int distancia = (int) Math.abs(j.hitbox.x - hitbox.x);
         return distancia <= distanciaataque * 5;
     }
     
-    protected boolean JogadorNoAlcance(Jogador j){
+    protected boolean jogadorAlcanceAtaque(Jogador j){
         int distancia = (int) Math.abs(j.hitbox.x - hitbox.x);
         return distancia <= distanciaataque ;
     }
     
-    protected boolean VisaoEstaLimpa(int[][] datanivel , Rectangle2D.Float hitboxi , Rectangle2D.Float hitboxj, int tiley){
-        int tilexinimigo = (int) (hitboxi.x / Jogo.TamanhoDosTiles);
-        int tilexjogador = (int) (hitboxj.x / Jogo.TamanhoDosTiles);
+    protected boolean visaoLimpa(int[][] datanivel , Rectangle2D.Float hitboxi , Rectangle2D.Float hitboxj, int tiley){
+        int tilexinimigo = (int) (hitboxi.x / Jogo.TAMANHO_TILES);
+        int tilexjogador = (int) (hitboxj.x / Jogo.TAMANHO_TILES);
         
         if(tilexinimigo > tilexjogador){
             for(int i = 0 ; i < (tilexinimigo - tilexjogador) ; i++){
-                if(tilesolido(tilexjogador + i, tiley,datanivel))
+                if(tileSolido(tilexjogador + i, tiley,datanivel))
                     return false;
             }
         }
         else{
             for(int i = 0 ; i < (tilexjogador - tilexinimigo) ; i++){
-                if(tilesolido(tilexinimigo + i, tiley,datanivel))
+                if(tileSolido(tilexinimigo + i, tiley,datanivel))
                     return false;
             }
         }
         
         if(tilexinimigo > tilexjogador){
             for(int i = 0 ; i < (tilexinimigo - tilexjogador) ; i++){
-                if(tilesolido(tilexjogador , tiley + i ,datanivel))
+                if(tileSolido(tilexjogador , tiley + i ,datanivel))
                     return false;
             }
         }
         else{
             for(int i = 0 ; i < (tilexjogador - tilexinimigo) ; i++){
-                if(tilesolido(tilexinimigo , tiley + i ,datanivel))
+                if(tileSolido(tilexinimigo , tiley + i ,datanivel))
                     return false;
             }
         }
@@ -229,34 +229,34 @@ public abstract class  Inimigo extends Entidade{
         return true;
     }
     
-    protected void ViraEmDirecaoAoJogador(Jogador j){
+    protected void viraaoJogador(Jogador j){
         if(j.hitbox.x > hitbox.x)
             direcao = DIREITA;
         else
             direcao = ESQUERDA;  
     }
     
-    protected void DaDano(Jogador j){
+    protected void inflingeDano(Jogador j){
         if(ataque1){
             if(hitboxataque1.intersects(j.hitbox))
-                j.RecebeDano(-GetDanoInimigos(tipoinimigo));
+                j.recebeDano(-GetDanoInimigos(tipoinimigo));
             checouataque = true;}
         
         if(ataque2){
             if(hitboxataque2.intersects(j.hitbox))
-                j.RecebeDano(-GetDanoInimigos(tipoinimigo));
+                j.recebeDano(-GetDanoInimigos(tipoinimigo));
             checouataque = true;
         }        
     }
     
-    protected void RecebeDano(int dano , int[][] datanivel , int direcaoataque){
+    protected void recebeDano(int dano , int[][] datanivel , int direcaoataque){
         this.vidaatual -= dano;
         
         if(vidaatual <= 0)
-            MudaDeEstado(MORRENDO_INIMIGO);
+            mudaEstado(MORRENDO_INIMIGO);
         else{
-            MudaDeEstado(RECEBENDO_DANO_INIMIGO);
-            Recua(datanivel , direcaoataque);
+            mudaEstado(RECEBENDO_DANO_INIMIGO);
+            recuar(datanivel , direcaoataque);
         }
     }
     
@@ -264,7 +264,7 @@ public abstract class  Inimigo extends Entidade{
     
     //ANIMAÇAO
     
-    protected void UpdateAnitick() {
+    protected void updateAnitick() {
         anitick++;
         if(anitick >= anispeed){
             anitick = 0;
@@ -284,23 +284,23 @@ public abstract class  Inimigo extends Entidade{
     
     
     
-    public void SetInmigo3Inativo(){
+    public void setInimigo3Inativo(){
         this.estadoinimigo = MORRENDO_INIMIGO;
     }
     
-    public boolean GetInimigoAtivo(){
+    public boolean getInimigoAtivo(){
         return this.ativo;
     }
     
-    public int GetVidaInimigo(){
+    public int getVidaInimigo(){
         return this.vidaatual;
     }
     
-    public int GetAniindexinimigo(){
+    public int getAniindexinimigo(){
         return this.aniindex;
     }
     
-    public int GetEstadoInimigo(){
+    public int getEstadoInimigo(){
         return this.estadoinimigo;
     }
 }
